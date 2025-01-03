@@ -5,6 +5,8 @@ import ServiceSection from "./ui/home.service"
 import TradingPlatform from "./ui/home.tradingPlatform"
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from "./ui/components/LanguageSelector"
+import UIGrid from "./ui/home.uigrid";
+
 
 import "../../i18n"
 export default function Home() {
@@ -78,6 +80,7 @@ export default function Home() {
           </div>
         </section>
         <ServiceSection></ServiceSection>
+        <UIGrid></UIGrid>
         {/* News Section */}
         <section className="container mx-auto px-4 py-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">
