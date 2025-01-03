@@ -15,28 +15,28 @@ const ServiceSection: React.FC = () => {
   // Content for each tab
   const tabContent: Record<TabKey, TabContentItem[]> = {
     individual: [
-      { icon: '👩‍💼', label: 'Môi Giới Chứng Khoán' },
-      { icon: '📊', label: 'Dịch Vụ Chứng Khoán' },
-      { icon: '💰', label: 'Quản Lý Tiền Nhà Đầu Tư' },
-      { icon: '🔗', label: 'Dịch Vụ Tài Chính' },
+      { icon: '👩‍💼', label: t("broker") },
+      { icon: '📊', label: t("securitiesServices") },
+      { icon: '💰', label: t("investorFundManagement") },
+      { icon: '🔗', label: t("financialServices") },
     ],
     financial: [
-      { icon: '🏦', label: 'Quản Lý Danh Mục Đầu Tư' },
-      { icon: '📈', label: 'Tư Vấn Tài Chính Doanh Nghiệp' },
-      { icon: '🧾', label: 'Quản Lý Cổ Đông' },
-      { icon: '🛠️', label: 'Dịch Vụ Tài Chính' },
+      { icon: '🏦', label: t("portfolioManagement") },
+      { icon: '📈', label: t("corporateFinanceConsulting") },
+      { icon: '🧾', label: t("shareholderManagement") },
+      { icon: '🛠️', label: t("financialServices") },
     ],
     utilities: [
-      { icon: '🔍', label: 'Giao Dịch Qua Web' },
-      { icon: '🗂️', label: 'Ứng Dụng Home Trading' },
-      { icon: '📂', label: 'Giao dịch Qua Mobile Web' },
-      { icon: '🛡️', label: 'Giao dịch Qua Mobile App' },
+      { icon: '🔍', label: t("webTrading") },
+      { icon: '🗂️', label: t("homeTradingApp") },
+      { icon: '📂', label: t("mobileWebTrading") },
+      { icon: '🛡️', label: t("mobileAppTrading") },
     ],
     support: [
-      { icon: '📞', label: 'Hướng Dẫn Giao Dịch' },
-      { icon: '📚', label: 'Hướng Dẫn Giao Dịch Tiền' },
-      { icon: '💡', label: 'Hướng Dẫn Tra Cứu Và Quản Lý Tài Khoản' },
-      { icon: '✉️', label: 'Các Biểu Mẫu' },
+      { icon: '📞', label: t("transactionGuide") },
+      { icon: '📚', label: t("fundTransactionGuide") },
+      { icon: '💡', label: t("accountManagementGuide") },
+      { icon: '✉️', label: t("forms") },
     ],
   };
 
