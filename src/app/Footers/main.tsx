@@ -17,30 +17,7 @@ const Footer = () => {
             <i className="fas fa-envelope text-green-600"></i> Email: 
           </span>
         </p>
-        <div className="mt-4 border-t border-gray-200 pt-4">
-          <ul className="flex justify-center space-x-6 text-sm text-gray-600">
-            <li>
-              <a href="#terms" className="hover:text-green-600">
-                Điều khoản sử dụng
-              </a>
-            </li>
-            <li>
-              <a href="#risk" className="hover:text-green-600">
-                Bản công bố rủi ro
-              </a>
-            </li>
-            <li>
-              <a href="#sitemap" className="hover:text-green-600">
-                Sơ đồ website
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="hover:text-green-600">
-                Liên hệ
-              </a>
-            </li>
-          </ul>
-        </div>
+        
       </div>
       <div className="fixed bottom-4 right-4">
         <a
