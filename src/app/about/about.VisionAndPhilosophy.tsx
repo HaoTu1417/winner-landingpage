@@ -15,8 +15,8 @@ const VisionAndPhilosophy = () => {
         <div className="p-8 bg-white shadow-md rounded-lg">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">Triết lý đầu tư</h3>
           <p className="text-gray-600">
-            Chiến lược của chúng tôi xoay quanh phương pháp đầu tư giá trị: "Chất lượng tốt nhất tại mức giá
-            hợp lý". Chúng tôi kết hợp hài hòa giữa phương pháp phân tích từ dưới lên và từ trên xuống để
+            Chiến lược của chúng tôi xoay quanh phương pháp đầu tư giá trị: &quot;Chất lượng tốt nhất tại mức giá
+            hợp lý&quot;. Chúng tôi kết hợp hài hòa giữa phương pháp phân tích từ dưới lên và từ trên xuống để
             đảm bảo hiệu quả đầu tư trong suốt quá trình: đánh giá, đầu tư và hậu đầu tư. Khả năng quản trị
             của doanh nghiệp và lợi thế cạnh tranh bền vững là yếu tố trọng tâm để chúng tôi xác định triển
             vọng đầu tư.
