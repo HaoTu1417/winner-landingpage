@@ -42,7 +42,7 @@ export default function Home() {
             <a href="#" className="mx-2">TƯ VẤN TRỰC TUYẾN</a>
             <a href="#" className="mx-2">TRUNG TÂM PHÂN TÍCH</a>
             <a href="#" className="mx-2">PHÁI SINH</a>
-            <a href="#" className="mx-2">VỀ AGR</a>
+            <a href="/about" className="mx-2">VỀ WFS</a>
           </div>
          <LanguageSelector></LanguageSelector>
         </div>
