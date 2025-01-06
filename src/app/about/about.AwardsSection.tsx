@@ -36,17 +36,7 @@ const awards: Award[] = [
 const AwardsSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Handler for moving to the next slide
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % awards.length);
-  };
-
-  // Handler for moving to the previous slide
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? awards.length - 1 : prevIndex - 1
-    );
-  };
+ 
 
   return (
     <div className="max-w-7xl mx-auto px-8 py-16">
