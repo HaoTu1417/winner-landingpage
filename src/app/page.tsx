@@ -6,7 +6,7 @@ import TradingPlatform from "./ui/home.tradingPlatform"
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from "./ui/components/LanguageSelector"
 import UIGrid from "./ui/home.uigrid";
-
+import Image from 'next/image'
 
 import "../../i18n"
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const { t } = useTranslation();
   return(
-    <div id="abc" className="font-sans text-black">
+    <div  className="font-sans text-black">
       {/* Header */}
       <header className="bg-black text-white">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -35,7 +35,10 @@ export default function Home() {
             <button className="sm:bg-green-600 px-4 py-2 rounded xs:bg-red-500 xs:size-20 sm:size-auto xs:text-xs sm:text-base">Giao Dịch Trực Tuyến</button>
           </div> */}
           {/* Logo */}
-          <div className="text-lg font-bold h-20"><img src="/LogoWFS.png" className="object-contain h-full mr-2"/></div>
+          <div className="text-lg font-bold h-20">
+            <img src="/LogoWFS.png" className="object-contain h-full mr-2"/>
+           
+          </div>
           <div className="hidden flex-row lg:flex">
             <a href="#" className="mx-2">TIN TỨC</a>
             <a href="#" className="mx-2">SẢN PHẨM DỊCH VỤ</a> 
@@ -64,21 +67,46 @@ export default function Home() {
        {/* Main Section */}
       <main className="bg-gray-100">
         {/* Banner */}
-        <section
+        {/* <section
           className="relative bg-cover bg-center text-white h-64 sm:h-96 flex items-center justify-center"
           style={{
-            backgroundImage: `url('/bg_slide.png.jpeg')`,
+            backgroundImage: `url('/bg_slide.png.webp')`,
           }}
-        >
-          <div className="absolute inset-0 sm:bg-[url('/bg_slide.sm.jpeg')] md:bg-[url('/bg_slide.mid.jpeg')] lg:bg-[url('/bg_slide.png.jpeg')] bg-cover bg-center"></div>
-          <div className="text-center z-10">
+        > */}
+
+
+          {/* <div className="absolute inset-0 sm:bg-[url('/bg_slide.sm.jpeg')] md:bg-[url('/bg_slide.mid.jpeg')] lg:bg-[url('/bg_slide.png.jpeg')] bg-cover bg-center"></div> */}
+          {/* <div className="text-center z-10">
             <h1 className="text-3xl sm:text-5xl font-bold">{t('companyName')}</h1>
             <p className="mt-4 text-lg sm:text-xl">{t('companySlogan')}</p>
             <button className="mt-6 bg-green-600 px-6 py-3 rounded text-white text-lg">
             {t('startNow')}
             </button>
           </div>
-        </section>
+        </section> */}
+
+      <div className="relative bg-container h-64 sm:h-96 flex items-center justify-center text-white">
+      <Image 
+          src="/bg_slide-768.webp" 
+          alt="Background description"
+          layout="fill"    
+          objectFit="cover"  
+          sizes="(max-width: 480px) 100vw,
+                (max-width: 768px) 100vw,
+                (max-width: 1024px) 100vw,
+                (max-width: 1440px) 100vw,
+                1440px"
+          priority
+          className="z-0"
+        />
+        <div className="text-center z-10">
+          <h1 className="text-3xl sm:text-5xl font-bold">{t('companyName')}</h1>
+          <p className="mt-4 text-lg sm:text-xl">{t('companySlogan')}</p>
+          <button className="mt-6 bg-green-600 px-6 py-3 rounded text-white text-lg">
+            {t('startNow')}
+          </button>
+        </div>
+      </div>
         <ServiceSection></ServiceSection>
         <UIGrid></UIGrid>
         {/* News Section */}
