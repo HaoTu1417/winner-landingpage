@@ -5,7 +5,7 @@ import Summary from './about.summary';
 import VisionAndPhilosophy from './about.VisionAndPhilosophy';
 import TeamSection from './about.TeamSection';
 import AwardsSection from './about.AwardsSection';
-import Footer from '../Footers/main';
+import Footer from '../index/footer';
 import { useRouter } from 'next/navigation';
 export default function AboutPage() {
   const tabs = ['Tổng quan', 'Đội ngũ', 'Giải thưởng'];

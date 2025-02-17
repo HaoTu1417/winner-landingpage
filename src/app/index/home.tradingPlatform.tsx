@@ -1,7 +1,7 @@
 "use-client";
 import React, { useState } from "react";
 
-import ImageButton from "./components/ImageButton";
+import ImageButton from "../ui/components/ImageButton";
 
 const handleClick = () => {
   alert("Button clicked!");
@@ -68,7 +68,7 @@ function TradingPlatform() {
         </button>
         <div className="flex flex-row">
           <ImageButton
-            imageSrc="/google-play-icon.svg"
+            imageSrc="/images/homepage/google-play-icon.svg"
             altText="Placeholder Icon"
             buttonText=""
             onClick={handleClick}
@@ -78,7 +78,7 @@ function TradingPlatform() {
             
           />
           <ImageButton
-            imageSrc="/apple-icon.svg"
+            imageSrc="/images/homepage/apple-icon.svg"
             altText="Placeholder Icon"
             buttonText=""
             onClick={handleClick}
