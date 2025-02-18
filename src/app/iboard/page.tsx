@@ -51,7 +51,13 @@ function Iboard() {
 
     // Create WebSocket connection
     //TODO: add socket domain to config.
-    const wsClient = new WebSocketClient("ws://localhost:3020");
+    const wsClient = new WebSocketClient(
+      process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || "ws://localhost:3021"
+    );
+    console.log(
+      "process.env.NEXT_PUBLIC_SOCKET_SERVER_URL",
+      process.env.NEXT_PUBLIC_SOCKET_SERVER_URL
+    );
 
     // Listen for messages from WebSocket
     wsClient.socket.onmessage = (event: MessageEvent) => {

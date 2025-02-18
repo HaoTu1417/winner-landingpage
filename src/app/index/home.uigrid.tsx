@@ -10,7 +10,7 @@ const cards = [
   },
   {
     title: 'IBOARD WEB',
-    image: '/bg-web-trading.png',
+    image: '/homepage/bg-web-trading.png',
     link: '/iboard'
   },
   {
