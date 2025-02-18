@@ -9,7 +9,7 @@ interface IboardProps {
 
 function Iboard({ initialStocks }: IboardProps) {
   const [stocks, setStocks] = useState<Stock[]>(initialStocks);
-
+  console.log('stocks',stocks);
   useEffect(() => {
     const wsClient = new WebSocketClient('ws://localhost:3020');
 
