@@ -15,7 +15,7 @@ function Index() {
 
 
   function handleRedirect() {
-    window.location.href = "https://app.winnerfin.click";
+    window.location.href = process.env.NEXT_PUBLIC_APP_URL || "https://app.winnerfin.click1";
   }
 
   return (

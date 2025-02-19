@@ -11,7 +11,6 @@ import cnTranslation from './public/locales/cn/translation.json';
 
 // Check if i18n has already been initialized to avoid reinitializing
 if (!i18n.isInitialized) {
-  console.log("alo i18");
   i18n
     .use(initReactI18next) // Connects react-i18next to i18next
     .init({

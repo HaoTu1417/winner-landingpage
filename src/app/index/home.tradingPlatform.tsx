@@ -49,13 +49,13 @@ function TradingPlatform() {
       </div>
 
       <div className="flex flex-col items-center mt-8">
-      <img
-          src="/khcn-vietcap-trading.webp"
+        <img
+          src="/images/homepage/khcn-vietcap-trading.webp"
           alt="Laptop displaying Vietcap Pro"
           className={`w-full max-w-md ${activeTab === tabs[0] ? "" : "hidden"}`}
         />
         <img
-          src="/khcn-vietcap-mobile.webp"
+          src="/images/homepage/khcn-vietcap-mobile.webp"
           alt="Laptop displaying Vietcap Pro"
           className={`w-full max-w-md ${activeTab === tabs[1] ? "" : "hidden"}`}
         />
@@ -75,7 +75,6 @@ function TradingPlatform() {
             className={`m-6 w-auto h-auto bg-black text-white rounded-md hover:bg-black ${
               activeTab === tabs[1] ? "" : "hidden"
             }`}
-            
           />
           <ImageButton
             imageSrc="/images/homepage/apple-icon.svg"
@@ -85,7 +84,6 @@ function TradingPlatform() {
             className={`m-6 w-auto h-auto bg-black text-white rounded-md hover:bg-black ${
               activeTab === tabs[1] ? "" : "hidden"
             }`}
-            
           />
         </div>
       </div>
