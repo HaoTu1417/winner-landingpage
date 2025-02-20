@@ -20,19 +20,26 @@ function Iboard() {
         console.log("initialStocks", initialStocks.data);
 
         const stockInstances = initialStocks.data.map(
-          (obj) =>
-            new Stock(
+          (obj) =>{
+
+           
+            const stock = 
+             new Stock(
               obj.name,
               obj.ceiling,
-              obj.roof,
+              obj.floor,
               obj.reference,
               obj.match,
               obj.orderBook,
-              obj.vol,
+              obj.volume,
               obj.high,
               obj.low,
-              obj.forgein
-            )
+              obj.updateTime,
+              obj.isEnabled
+            );
+             console.log("obj", obj, stock);
+            return stock;
+          }
         );
         setStocks(stockInstances);
       } catch (error: unknown) {
@@ -60,15 +67,33 @@ function Iboard() {
     );
 
     // Listen for messages from WebSocket
+    // wsClient.socket.onmessage = (event: MessageEvent) => {
+    //   const updatedStock = JSON.parse(event.data) as Stock;
+    //   // Update stock data in the table based on stock.name
+    //   console.log("updatedStock", updatedStock);
+    //   setStocks((prevStocks) =>
+    //     prevStocks.map((stock) =>
+    //       stock.name === updatedStock.name ? updatedStock : stock
+    //     )
+    //   );
+    // };
+
     wsClient.socket.onmessage = (event: MessageEvent) => {
       const updatedStock = JSON.parse(event.data) as Stock;
-      // Update stock data in the table based on stock.name
-      setStocks((prevStocks) =>
-        prevStocks.map((stock) =>
-          stock.name === updatedStock.name ? updatedStock : stock
-        )
-      );
+
+      // Log dữ liệu trước khi thực hiện cập nhật
+      console.log("updatedStock received:", JSON.parse(event.data));
+      
+      // setStocks((prevStocks) => {
+      //   return prevStocks.map((stock) => {
+      //     // Log từng phần tử trước khi so sánh
+      //     console.log("Comparing:", stock, "with", updatedStock);
+
+      //     return stock.name === updatedStock.name ? updatedStock : stock;
+      //   });
+      // });
     };
+
 
     // Cleanup on component unmount
     return () => {
@@ -150,67 +175,68 @@ function Iboard() {
         </thead>
         <tbody className="bg-black text-white">
           {stocks.map((stock, index) => (
+           
             <tr key={index} className="p-2 border-t text-center">
               <td className="p-2 border border-gray-700">{stock.name}</td>
               <td className="p-2 border border-gray-700 text-purple-500">
                 {(stock.ceiling / 1000).toFixed(2)}
               </td>
               <td className="p-2 border border-gray-700 text-cyan-500">
-                {(stock.roof / 1000).toFixed(2)}
+                {(stock.floor / 1000).toFixed(2)}
               </td>
               <td className="p-2 border border-gray-700 text-yellow-400">
                 {(stock.reference / 1000).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.askPrice1,
+                  stock.orderBook.asks[0],
                   stock.reference
                 )}`}
               >
-                {(stock.orderBook.askPrice1 > 0
-                  ? stock.orderBook.askPrice1 / 1000
+                {(stock.orderBook.asks[0] > 0
+                  ? stock.orderBook.asks[0] / 1000
                   : 0
                 ).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.askVolume1,
+                  stock.orderBook.askSizes[0],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.askVolume1}
+                {stock.orderBook.askSizes[0]}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.askPrice2,
+                  stock.orderBook.asks[1],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.askPrice2}
+                {stock.orderBook.asks[1]}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.askVolume2,
+                  stock.orderBook.askSizes[1],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.askVolume2}
+                {stock.orderBook.askSizes[1]}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.askPrice3,
+                  stock.orderBook.asks[2],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.askPrice3}
+                {stock.orderBook.asks[2]}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.askVolume3,
+                  stock.orderBook.askSizes[2],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.askVolume3}
+                {stock.orderBook.askSizes[2]}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
@@ -238,7 +264,7 @@ function Iboard() {
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.match.percentChange,
+                  stock.match.percent,
                   stock.reference
                 )}`}
               >
@@ -246,54 +272,54 @@ function Iboard() {
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidPrice1,
+                  stock.orderBook.bids[0],
                   stock.reference
                 )}`}
               >
-                {(stock.orderBook.bidPrice1 / 1000).toFixed(2)}
+                {(stock.orderBook.bids[0] / 1000).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidVolume1,
+                  stock.orderBook.bidSizes[0],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.bidVolume1}
+                {stock.orderBook.bidSizes[0]}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidPrice2,
+                  stock.orderBook.bids[1],
                   stock.reference
                 )}`}
               >
-                {(stock.orderBook.bidPrice2 / 1000).toFixed(2)}
+                {(stock.orderBook.bids[1] / 1000).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidVolume2,
+                  stock.orderBook.bidSizes[1],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.bidVolume2}
+                {stock.orderBook.bidSizes[1]}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidPrice3,
+                  stock.orderBook.bidSizes[2],
                   stock.reference
                 )}`}
               >
-                {(stock.orderBook.bidPrice3 / 1000).toFixed(2)}
+                {(stock.orderBook.bidSizes[2] / 1000).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidVolume3,
+                  stock.orderBook.bidSizes[2],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.bidVolume3}
+                {stock.orderBook.bidSizes[2]}
               </td>
               <td className="p-2 border border-gray-700 text-white">
-                {stock.vol}
+                {stock.volume}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
@@ -312,13 +338,13 @@ function Iboard() {
                 {(stock.low / 1000).toFixed(2)}
               </td>
               <td className="p-2 border border-gray-700">
-                {stock.forgein.buyVolume}
+                {/* {stock.forgein.buyVolume} */}
               </td>
               <td className="p-2 border border-gray-700">
-                {stock.forgein.sellVolume}
+                {/* {stock.forgein.sellVolume} */}
               </td>
               <td className="p-2 border border-gray-700">
-                {stock.forgein.totalValue}
+                {/* {stock.forgein.totalValue} */}
               </td>
             </tr>
           ))}
