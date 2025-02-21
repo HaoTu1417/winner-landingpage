@@ -9,15 +9,17 @@ function Iboard() {
   // State to hold stocks
   const [stocks, setStocks] = useState<Stock[]>([]); // Initialize with empty array
 
-  //TODO: setting url backend vào file env
-  const iboardService = new IboardService("http://localhost:3020");
+
+  const iboardService = new IboardService(
+    process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || "ws://localhost:3021"
+  );
 
   useEffect(() => {
     // Fetch initial data on the client side when the component mounts
     async function fetchData() {
       try {
         const initialStocks = await iboardService.getStocks();
-        console.log("initialStocks", initialStocks.data);
+        //console.log("initialStocks", initialStocks.data);
 
         const stockInstances = initialStocks.data.map(
           (obj) =>{
@@ -37,7 +39,7 @@ function Iboard() {
               obj.updateTime,
               obj.isEnabled
             );
-             console.log("obj", obj, stock);
+             //console.log("obj", obj, stock);
             return stock;
           }
         );
@@ -57,7 +59,6 @@ function Iboard() {
     fetchData();
 
     // Create WebSocket connection
-    //TODO: add socket domain to config.
     const wsClient = new WebSocketClient(
       process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || "ws://localhost:3021"
     );
@@ -82,16 +83,16 @@ function Iboard() {
       const updatedStock = JSON.parse(event.data) as Stock;
 
       // Log dữ liệu trước khi thực hiện cập nhật
-      console.log("updatedStock received:", JSON.parse(event.data));
+      //console.log("updatedStock received:", JSON.parse(event.data));
       
-      // setStocks((prevStocks) => {
-      //   return prevStocks.map((stock) => {
-      //     // Log từng phần tử trước khi so sánh
-      //     console.log("Comparing:", stock, "with", updatedStock);
+      setStocks((prevStocks) => {
+        return prevStocks.map((stock) => {
+          // Log từng phần tử trước khi so sánh
+          //console.log("Comparing:", stock, "with", updatedStock);
 
-      //     return stock.name === updatedStock.name ? updatedStock : stock;
-      //   });
-      // });
+          return stock.name === updatedStock.name ? updatedStock : stock;
+        });
+      });
     };
 
 
@@ -101,7 +102,7 @@ function Iboard() {
     };
   }, []);
 
-  //TODO: fetch dữ liệu từ start
+
 
   const getTextColorClass = (price: number, reference: number) => {
     if (price > reference) return "text-green-500";
