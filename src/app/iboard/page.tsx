@@ -1,64 +1,55 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Stock } from "./Stock";
+import { Stock, Match, OrderBook } from "./Stock";
 import { WebSocketClient } from "@/lib/WebSocketClient";
 import IboardService from "./IboardService";
 import { AxiosError } from "axios";
 
 function Iboard() {
   // State to hold stocks
-  const [stocks, setStocks] = useState<Stock[]>([]); // Initialize with empty array
+  const [stocksDict, setStocksDict] = useState<{ [key: string]: Stock }>({});
+  const [stocks, setStocks] = useState<Stock[]>([]);
 
+  const arrayToDictionary = (
+    stocksArray: Stock[]
+  ): { [key: string]: Stock } => {
+    return stocksArray.reduce((acc, stock) => {
+      acc[stock.name] = stock;
+      return acc;
+    }, {} as { [key: string]: Stock });
+  };
 
-  const iboardService = new IboardService(
-    process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || "ws://localhost:3021"
-  );
+  const stockNames = ["ABC", "VCB", "ACB"];
+  const stockIndex: { [key: string]: number } = {};
+  let isInitDone = false;
+
+  const initStocks = () => {
+    const tempStocks: Stock[] = stockNames.map(
+      (stockName, index) =>
+        new Stock(
+          stockName,
+          0,
+          0,
+          0,
+          new Match(0, 0, 0, 0, 0),
+          new OrderBook([0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]),
+          0,
+          0,
+          0,
+          "",
+          0,
+          "VN"
+        )
+    );
+   // console.log("tempStocks", tempStocks);
+    setStocks(tempStocks);
+    //console.log(" after tempStocks", stocks, tempStocks);
+    isInitDone = true;
+  };
 
   useEffect(() => {
-    // Fetch initial data on the client side when the component mounts
-    async function fetchData() {
-      try {
-        const initialStocks = await iboardService.getStocks();
-        //console.log("initialStocks", initialStocks.data);
-
-        const stockInstances = initialStocks.data.map(
-          (obj) =>{
-
-           
-            const stock = 
-             new Stock(
-              obj.name,
-              obj.ceiling,
-              obj.floor,
-              obj.reference,
-              obj.match,
-              obj.orderBook,
-              obj.volume,
-              obj.high,
-              obj.low,
-              obj.updateTime,
-              obj.isEnabled
-            );
-             //console.log("obj", obj, stock);
-            return stock;
-          }
-        );
-        setStocks(stockInstances);
-      } catch (error: unknown) {
-        if (error instanceof AxiosError) {
-          console.log("Status Code:", error.response?.status);
-          console.log("Error Data:", error.response?.data);
-        } else if (error instanceof Error) {
-          console.log("Error:", error.message);
-        } else {
-          console.log("Unexpected error:", error);
-        }
-      }
-    }
-
-    fetchData();
-
-    // Create WebSocket connection
+    // Initialize stocks and set up WebSocket connection
+    initStocks();
     const wsClient = new WebSocketClient(
       process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || "ws://localhost:3021"
     );
@@ -67,42 +58,42 @@ function Iboard() {
       process.env.NEXT_PUBLIC_SOCKET_SERVER_URL
     );
 
-    // Listen for messages from WebSocket
-    // wsClient.socket.onmessage = (event: MessageEvent) => {
-    //   const updatedStock = JSON.parse(event.data) as Stock;
-    //   // Update stock data in the table based on stock.name
-    //   console.log("updatedStock", updatedStock);
-    //   setStocks((prevStocks) =>
-    //     prevStocks.map((stock) =>
-    //       stock.name === updatedStock.name ? updatedStock : stock
-    //     )
-    //   );
-    // };
-
     wsClient.socket.onmessage = (event: MessageEvent) => {
-      const updatedStock = JSON.parse(event.data) as Stock;
+      if (!isInitDone) {
+        return;
+      }
+      const updatedStockData = JSON.parse(event.data);
+      console.log("onmessage", updatedStockData);
+      const updatedStock = new Stock(
+        updatedStockData.name,
+        updatedStockData.ceiling,
+        updatedStockData.floor,
+        updatedStockData.reference,
+        updatedStockData.match,
+        updatedStockData.orderBook,
+        updatedStockData.volume,
+        updatedStockData.high,
+        updatedStockData.low,
+        updatedStockData.updateTime,
+        updatedStockData.isEnabled,
+        updatedStockData.exchange
+      );
 
-      // Log dữ liệu trước khi thực hiện cập nhật
-      //console.log("updatedStock received:", JSON.parse(event.data));
-      
       setStocks((prevStocks) => {
-        return prevStocks.map((stock) => {
-          // Log từng phần tử trước khi so sánh
-          //console.log("Comparing:", stock, "with", updatedStock);
-
-          return stock.name === updatedStock.name ? updatedStock : stock;
-        });
+        const index = stockIndex[updatedStock.name];
+        if (index >= 0) {
+          const updatedStocks = [...prevStocks];
+          updatedStocks[index] = updatedStock;
+          return updatedStocks;
+        }
+        return prevStocks;
       });
     };
 
-
-    // Cleanup on component unmount
     return () => {
       wsClient.closeConnection();
     };
   }, []);
-
-
 
   const getTextColorClass = (price: number, reference: number) => {
     if (price > reference) return "text-green-500";
@@ -114,7 +105,6 @@ function Iboard() {
     <div className="p-4">
       <table className="w-full text-sm bg-gray-800 text-black rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-gray-300">
-          {/* Main Header Row */}
           <tr className="text-xs font-semibold border border-gray-700">
             <th rowSpan={2} className="p-2 text-center border border-gray-700">
               Mã CK
@@ -150,8 +140,6 @@ function Iboard() {
               ĐTNN
             </th>
           </tr>
-
-          {/* Sub-header Row */}
           <tr className="text-xs font-normal border border-gray-700">
             <th className="p-2 text-center border border-gray-700">Giá 3</th>
             <th className="p-2 text-center border border-gray-700">KL 3</th>
@@ -176,7 +164,6 @@ function Iboard() {
         </thead>
         <tbody className="bg-black text-white">
           {stocks.map((stock, index) => (
-           
             <tr key={index} className="p-2 border-t text-center">
               <td className="p-2 border border-gray-700">{stock.name}</td>
               <td className="p-2 border border-gray-700 text-purple-500">
@@ -190,54 +177,57 @@ function Iboard() {
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.asks[0],
+                  stock.orderBook.bids[2],
                   stock.reference
                 )}`}
               >
-                {(stock.orderBook.asks[0] > 0
-                  ? stock.orderBook.asks[0] / 1000
+                {stock ? stock.getBid(2) : ""}
+              </td>
+              <td
+                className={`p-2 border border-gray-700 ${getTextColorClass(
+                  stock.orderBook.bidSizes[2],
+                  stock.reference
+                )}`}
+              >
+                {stock.orderBook.bidSizes[2].toLocaleString("en-US")}
+              </td>
+              <td
+                className={`p-2 border border-gray-700 ${getTextColorClass(
+                  stock.orderBook.bids[1],
+                  stock.reference
+                )}`}
+              >
+                {(stock.orderBook.bids[1] > 0
+                  ? stock.orderBook.bids[1] / 1000
                   : 0
                 ).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.askSizes[0],
+                  stock.orderBook.bidSizes[1],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.askSizes[0]}
+                {stock.orderBook.bidSizes[1].toLocaleString("en-US")}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.asks[1],
+                  stock.orderBook.bids[0],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.asks[1]}
+                {(stock.orderBook.bids[0] > 0
+                  ? stock.orderBook.bids[0] / 1000
+                  : 0
+                ).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.askSizes[1],
+                  stock.orderBook.bidSizes[0],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.askSizes[1]}
-              </td>
-              <td
-                className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.asks[2],
-                  stock.reference
-                )}`}
-              >
-                {stock.orderBook.asks[2]}
-              </td>
-              <td
-                className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.askSizes[2],
-                  stock.reference
-                )}`}
-              >
-                {stock.orderBook.askSizes[2]}
+                {stock.orderBook.bidSizes[0].toLocaleString("en-US")}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
@@ -245,7 +235,7 @@ function Iboard() {
                   stock.reference
                 )}`}
               >
-                {(stock.match.price / 1000).toFixed(0)}
+                {(stock.match.price / 1000).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
@@ -261,63 +251,63 @@ function Iboard() {
                   stock.reference
                 )}`}
               >
-                {stock.match.change.toFixed(0)}
+                {(stock.match.change / 1000).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.match.percent,
+                  stock.match.ratioChange,
                   stock.reference
                 )}`}
               >
-                {stock.match.percentChange}%
+                {stock.match.ratioChange}%
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bids[0],
+                  stock.orderBook.asks[0],
                   stock.reference
                 )}`}
               >
-                {(stock.orderBook.bids[0] / 1000).toFixed(2)}
+                {(stock.orderBook.asks[0] / 1000).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidSizes[0],
+                  stock.orderBook.askSizes[0],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.bidSizes[0]}
+                {stock.orderBook.askSizes[0]}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bids[1],
+                  stock.orderBook.asks[1],
                   stock.reference
                 )}`}
               >
-                {(stock.orderBook.bids[1] / 1000).toFixed(2)}
+                {(stock.orderBook.asks[1] / 1000).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidSizes[1],
+                  stock.orderBook.askSizes[1],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.bidSizes[1]}
+                {stock.orderBook.askSizes[1]}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidSizes[2],
+                  stock.orderBook.asks[2],
                   stock.reference
                 )}`}
               >
-                {(stock.orderBook.bidSizes[2] / 1000).toFixed(2)}
+                {(stock.orderBook.asks[2] / 1000).toFixed(2)}
               </td>
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.orderBook.bidSizes[2],
+                  stock.orderBook.askSizes[2],
                   stock.reference
                 )}`}
               >
-                {stock.orderBook.bidSizes[2]}
+                {stock.orderBook.askSizes[2]}
               </td>
               <td className="p-2 border border-gray-700 text-white">
                 {stock.volume}
@@ -339,13 +329,13 @@ function Iboard() {
                 {(stock.low / 1000).toFixed(2)}
               </td>
               <td className="p-2 border border-gray-700">
-                {/* {stock.forgein.buyVolume} */}
+                {/* Placeholder for NN mua */}
               </td>
               <td className="p-2 border border-gray-700">
-                {/* {stock.forgein.sellVolume} */}
+                {/* Placeholder for NN bán */}
               </td>
               <td className="p-2 border border-gray-700">
-                {/* {stock.forgein.totalValue} */}
+                {/* Placeholder for Room */}
               </td>
             </tr>
           ))}
