@@ -21,6 +21,7 @@ function Index() {
     fontSize: "16px",
     lineHeight: "22.4px",
     letterSpacing: "2%",
+    color: "#403D3D",
   };
 
   // Define an array of navigation items
