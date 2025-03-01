@@ -15,15 +15,24 @@ function Index() {
   const { t } = useTranslation();
   const pathname = usePathname();
 
-  const headerStyle = {
+  const interFont = {
     fontFamily: "Inter",
+  }
+
+  const headerStyle = {
+   
     fontWeight: 500,
     fontSize: "16px",
     lineHeight: "22.4px",
     letterSpacing: "2%",
     color: "#403D3D",
   };
+  const companyNameStyle = {
+    textShadow: "0px 0px 6px #C5FFD8"
+  }
 
+  
+  
   // Define an array of navigation items
   const navLinks = [
     { href: "/", label: "Trang chủ", extraClass: "inter",  },
@@ -47,7 +56,7 @@ function Index() {
   return (
     <div className="font-sans text-black">
       {/* Header */}
-      <header style={headerStyle} className="bg-white text-blue">
+      <header style={{...headerStyle,...interFont}} className="bg-white text-blue">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           {/* Menu Toggle (Mobile) */}
           <button
@@ -121,30 +130,43 @@ function Index() {
         </nav>
       )}
 
+
       {/* Main Section */}
       <main className="bg-gray-100">
-        <div className="relative bg-container h-64 sm:h-96 flex items-center justify-center text-white">
-          <Image
-            src="/images/homepage/bg_slide-768.webp"
-            alt="Background description"
-            layout="fill"
-            objectFit="cover"
-            sizes="(max-width: 480px) 100vw,
-                (max-width: 768px) 100vw,
-                (max-width: 1024px) 100vw,
-                (max-width: 1440px) 100vw,
-                1440px"
-            priority
-            className="z-0"
-          />
+        <div className="relative bg-container h-[34rem] sm:h-[34rem] flex items-center justify-center text-white">
+         
           <div className="text-center z-10">
-            <h1 className="text-3xl sm:text-5xl font-bold">
-              {t("companyName")}
+            <h1 className="text-3xl sm:text-5xl font-bold" style={{...companyNameStyle,...interFont}}>
+              {/* {t("companyName")} */}
+              Công ty Tài chính WFS
             </h1>
-            <p className="mt-4 text-lg sm:text-xl">{t("companySlogan")}</p>
-            <button className="mt-6 bg-green-600 px-6 py-3 rounded text-white text-lg">
+            <p className="mt-4 text-lg sm:text-xl">
+              {t("companySlogan")}
+              </p>
+            <button className=" mt-6 w-[15rem] h-[4rem] bg-green-600 px-6 py-3 rounded-full text-white text-2xl bg-gradient-to-b from-[#1ADB21] to-[#0C911A] shadow-[0px_0px_24px_rgba(174,255,97,0.35)]"
+            style= {{...interFont,fontWeight:530}}>
               {t("startNow")}
             </button>
+          </div>
+
+
+      <div style={{height:"100%",width:"100%",position:"absolute",zIndex:1,backgroundColor:"rgba(0,0,0,0.4)"}}>
+
+      </div>
+          <div>
+            <Image
+              src="/images/homepage/BannerDesktop1.png"
+              alt="Background description"
+              layout="fill"
+              objectFit="cover"
+              sizes="(max-width: 480px) 100vw,
+                  (max-width: 768px) 100vw,
+                  (max-width: 1024px) 100vw,
+                  (max-width: 1440px) 100vw,
+                  1440px"
+              priority
+              className="z-0"
+            />
           </div>
         </div>
         <ServiceSection />

@@ -38,7 +38,7 @@ function TradingPlatform() {
               onClick={() => setActiveTab(tab)}
               className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
                 activeTab === tab
-                  ? "bg-green-600 text-white shadow"
+                  ? "bg-[#0D169E] text-white shadow"
                   : "text-gray-500 hover:text-black"
               }`}
             >
@@ -50,17 +50,17 @@ function TradingPlatform() {
 
       <div className="flex flex-col items-center mt-8">
       <img
-          src="/khcn-vietcap-trading.webp"
+          src="/images/homepage/khcn-vietcap-trading.webp"
           alt="Laptop displaying Vietcap Pro"
           className={`w-full max-w-md ${activeTab === tabs[0] ? "" : "hidden"}`}
         />
         <img
-          src="/khcn-vietcap-mobile.webp"
+          src="/images/homepage/khcn-vietcap-mobile.webp"
           alt="Laptop displaying Vietcap Pro"
           className={`w-full max-w-md ${activeTab === tabs[1] ? "" : "hidden"}`}
         />
         <button
-          className={`mt-6 px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-800 ${
+          className={`mt-6 px-6 py-3 bg-[#0D169E] text-white rounded-md hover:bg-green-800 ${
             activeTab === tabs[0] ? "" : "hidden"
           }`}
         >
