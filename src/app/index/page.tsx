@@ -1,27 +1,62 @@
-'use client'
+"use client";
 import React, { useState } from "react";
-import Footer from "../index/footer"
-import ServiceSection from "./home.service"
-import TradingPlatform from "./home.tradingPlatform"
-import { useTranslation } from 'react-i18next';
-import LanguageSelector from "../ui/components/LanguageSelector"
+import Footer from "../index/footer";
+import ServiceSection from "./home.service";
+import TradingPlatform from "./home.tradingPlatform";
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "../ui/components/LanguageSelector";
 import UIGrid from "./home.uigrid";
-import Image from 'next/image'
-function Index() {
-    const [menuOpen, setMenuOpen] = useState(false);
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
+function Index() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const { t } = useTranslation();
+  const pathname = usePathname();
 
-
-  function handleRedirect() {
-    window.location.href = process.env.NEXT_PUBLIC_APP_URL || "https://app.winnerfin.click1";
+  const interFont = {
+    fontFamily: "Inter",
   }
+
+  const headerStyle = {
+   
+    fontWeight: 500,
+    fontSize: "16px",
+    lineHeight: "22.4px",
+    letterSpacing: "2%",
+    color: "#403D3D",
+  };
+  const companyNameStyle = {
+    textShadow: "0px 0px 6px #C5FFD8"
+  }
+
+  
+  
+  // Define an array of navigation items
+  const navLinks = [
+    { href: "/", label: "Trang chủ", extraClass: "inter",  },
+    { href: "/news", label: "Tin tức" },
+    { href: "/service", label: "Dịch vụ" },
+    { href: "/tttt", label: "Tư vấn trực tuyến" },
+    { href: "/analyst", label: "Trung tâm phân tích" },
+    { href: "/future", label: "Phái sinh" },
+    {
+      href: "/about",
+      label: "Về WFS",
+      // Mark this as special so we can conditionally change its style based on the pathname
+      
+    },
+  ];
+
+  // Common classes for all links
+  const commonClasses =
+    "mx-2 transition-all duration-300 hover:underline hover:text-[#0D169E]";
 
   return (
     <div className="font-sans text-black">
       {/* Header */}
-      <header className="bg-black text-white">
+      <header style={{...headerStyle,...interFont}} className="bg-white text-blue">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           {/* Menu Toggle (Mobile) */}
           <button
@@ -32,39 +67,40 @@ function Index() {
             ☰
           </button>
 
-          {/* Desktop Right Buttons */}
-          {/* <div className="lg:flex space-x-4">
-            <button className="sm:bg-green-600 px-4 py-2 rounded xs:bg-red-500 xs:size-20 sm:size-auto xs:text-xs sm:text-base">Mở Tài Khoản</button>
-            <button className="sm:bg-green-600 px-4 py-2 rounded xs:bg-red-500 xs:size-20 sm:size-auto xs:text-xs sm:text-base">Giao Dịch Trực Tuyến</button>
-          </div> */}
           {/* Logo */}
           <div className="text-lg font-bold h-20">
             <img
               src="/images/LogoWFS.png"
               className="object-contain h-full mr-2"
+              alt="Logo"
             />
           </div>
-          <div className="hidden flex-row lg:flex">
-            <a href="#" className="mx-2">
-              TIN TỨC
-            </a>
-            <a href="#" className="mx-2">
-              SẢN PHẨM DỊCH VỤ
-            </a>
-            <a href="#" className="mx-2">
-              TƯ VẤN TRỰC TUYẾN
-            </a>
-            <a href="#" className="mx-2">
-              TRUNG TÂM PHÂN TÍCH
-            </a>
-            <a href="#" className="mx-2">
-              PHÁI SINH
-            </a>
-            <a href="/about" className="mx-2">
-              VỀ WFS
-            </a>
+
+          {/* Navigation Links */}
+          <div className="hidden flex-row lg:flex" id="NavigationLink">
+            {navLinks.map((link, index) => {
+              // For special link(s), add extra classes and inline styles conditionally
+              const isSpecial = pathname === link.href;
+              return (
+                <a
+                  key={index}
+                  href={link.href}
+                  className={`${commonClasses} ${link.extraClass || ""} ${
+                    isSpecial ? "underline underline-offset-4" : ""
+                  }`}
+                  style={
+                    isSpecial
+                      ? { ...headerStyle, color: "#0D169E", fontWeight: 700 }
+                      : headerStyle
+                  }
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </div>
-          <LanguageSelector></LanguageSelector>
+
+          <LanguageSelector />
         </div>
       </header>
 
@@ -93,127 +129,52 @@ function Index() {
           </div>
         </nav>
       )}
+
+
       {/* Main Section */}
       <main className="bg-gray-100">
-        <div className="relative bg-container h-64 sm:h-96 flex items-center justify-center text-white">
-          <Image
-            src="/images/homepage/bg_slide-768.webp"
-            alt="Background description"
-            layout="fill"
-            objectFit="cover"
-            sizes="(max-width: 480px) 100vw,
-                (max-width: 768px) 100vw,
-                (max-width: 1024px) 100vw,
-                (max-width: 1440px) 100vw,
-                1440px"
-            priority
-            className="z-0"
-          />
+        <div className="relative bg-container h-[34rem] sm:h-[34rem] flex items-center justify-center text-white">
+         
           <div className="text-center z-10">
-            <h1 className="text-3xl sm:text-5xl font-bold">
-              {t("companyName")}
+            <h1 className="text-3xl sm:text-5xl font-bold" style={{...companyNameStyle,...interFont}}>
+              {/* {t("companyName")} */}
+              Công ty Tài chính WFS
             </h1>
-            <p className="mt-4 text-lg sm:text-xl">{t("companySlogan")}</p>
-            <button
-              className="mt-6 bg-green-600 px-6 py-3 rounded text-white text-lg"
-              onClick={handleRedirect}
-            >
+            <p className="mt-4 text-lg sm:text-xl">
+              {t("companySlogan")}
+              </p>
+            <button className=" mt-6 w-[15rem] h-[4rem] bg-green-600 px-6 py-3 rounded-full text-white text-2xl bg-gradient-to-b from-[#1ADB21] to-[#0C911A] shadow-[0px_0px_24px_rgba(174,255,97,0.35)]"
+            style= {{...interFont,fontWeight:530}}>
               {t("startNow")}
             </button>
           </div>
-        </div>
-        <ServiceSection></ServiceSection>
-        <UIGrid></UIGrid>
-        {/* News Section */}
-        <section className="container mx-auto px-4 py-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">
-            Công bố thông tin <span className="text-green-600">AGRISECO</span>
-          </h2>
-          <div className="space-y-4">
-            {[
-              {
-                date: "2 ngày trước",
-                content:
-                  "Agriseco công bố thông tin Quyết định xử phạt vi phạm hành chính về thuế",
-              },
-              {
-                date: "3 ngày trước",
-                content:
-                  "Agriseco công bố thông tin Quyết định xử phạt vi phạm hành chính về thuế",
-              },
-              {
-                date: "1 tháng trước",
-                content:
-                  "Agriseco công bố Quyết định về việc ký kết Hợp đồng tín dụng...",
-              },
-              {
-                date: "1 tháng trước",
-                content: "AGR - Hướng dẫn thủ tục nhận cổ tức năm 2023",
-              },
-            ].map((news, idx) => (
-              <div
-                key={idx}
-                className="bg-white shadow-md rounded p-4 flex justify-between items-center"
-              >
-                <div>
-                  <p className="text-gray-500 text-sm">{news.date}</p>
-                  <p className="text-lg font-medium">{news.content}</p>
-                </div>
-                <button className="bg-red-600 text-white px-4 py-2 rounded">
-                  PDF
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
 
-        {/* Bonds Section */}
-        <section className="container mx-auto px-4 py-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">
-            TRÁI PHIẾU <span className="text-green-600">AGRIBANK</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:items-center">
-            <div className="md:order-1">
-              <img
-                src="/images/homepage/bond.png"
-                alt="Agribank Building"
-                className="rounded shadow-md"
-              />
-            </div>
-            <div className="space-y-4 md:order-2">
-              {[
-                {
-                  title:
-                    "Agribank công bố thông tin về việc phát hành trái phiếu ra công chúng năm 2024",
-                  content:
-                    "Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam (Agribank) thông báo phát hành Trái phiếu ra công chúng năm 2024 với số lượng đăng ký chào bán là 100.000.000 trái phiếu, tương đương 10.000 tỷ đồng nội dung cụ thể như sau....",
-                },
-                {
-                  title:
-                    "Agribank công bố thông tin về việc phát hành trái phiếu ra công chúng năm 2023",
-                  content:
-                    "Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam (Agribank) thông báo phát hành Trái phiếu ra công chúng năm 2023 với số lượng đăng ký chào bán là 100.000.000 trái phiếu, tương đương 10.000.000.000.000 đồng. nội dung cụ thể như sau....",
-                },
-                {
-                  title:
-                    "Agribank công bố thông tin về việc phát hành trái phiếu ra công chúng năm 2022",
-                  content:
-                    "Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam (Agribank) thông báo phát hành Trái phiếu ra công chúng năm 2022 với số lượng đăng ký chào bán là 100.000.000 trái phiếu, tương đương 10.000.000.000.000 đồng. nội dung cụ thể như sau....",
-                },
-              ].map((bond, idx) => (
-                <div key={idx} className="bg-white shadow-md rounded p-4">
-                  <h3 className="text-lg font-bold text-green-600">
-                    {bond.title}
-                  </h3>
-                  <p className="text-gray-700 mt-2">{bond.content}</p>
-                </div>
-              ))}
-            </div>
+
+      <div style={{height:"100%",width:"100%",position:"absolute",zIndex:1,backgroundColor:"rgba(0,0,0,0.4)"}}>
+
+      </div>
+          <div>
+            <Image
+              src="/images/homepage/BannerDesktop1.png"
+              alt="Background description"
+              layout="fill"
+              objectFit="cover"
+              sizes="(max-width: 480px) 100vw,
+                  (max-width: 768px) 100vw,
+                  (max-width: 1024px) 100vw,
+                  (max-width: 1440px) 100vw,
+                  1440px"
+              priority
+              className="z-0"
+            />
           </div>
-        </section>
+        </div>
+        <ServiceSection />
+        <UIGrid />
+        {/* ...other sections */}
       </main>
 
-      <TradingPlatform></TradingPlatform>
+      <TradingPlatform />
 
       <Footer />
     </div>
