@@ -4,8 +4,8 @@ const Footer = () => {
   return (
     <footer className="bg-white text-center text-gray-800 border-t border-gray-200">
       <div className="container mx-auto py-6 px-4">
-        <h2 className="text-green-600 font-semibold text-lg">
-          Công ty Tài Chính Winner Finance Service
+        <h2 className="text-[] font-semibold text-lg">
+          Công ty Winner Finance Service
         </h2>
         <p className="mt-2 text-sm">
           <span className="block">
@@ -14,7 +14,7 @@ const Footer = () => {
           <span className="block mt-2">
             <i className="fas fa-phone-alt text-green-600"></i> Tel: 0866 763 661 &nbsp;&nbsp;&nbsp;
             {/* <i className="fas fa-fax text-green-600 hidden"></i> Fax: 024 62765666 &nbsp;&nbsp;&nbsp; */}
-            <i className="fas fa-envelope text-green-600"></i> Email: 
+            <i className="fas fa-envelope text-green-600"></i> Email: contact@wfs.vn
           </span>
         </p>
         
