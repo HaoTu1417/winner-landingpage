@@ -4,24 +4,24 @@ import Link from 'next/link';
 
 const cards = [
   {
-    title: 'TRUNG TÂM PHÂN TÍCH',
-    image: '/bg-trung-tam-phan-tich.png',
-    link: '/analytics-center'
+    title: "TRUNG TÂM PHÂN TÍCH",
+    image: "/images/homepage/bg-trung-tam-phan-tich.png",
+    link: "/analytics-center",
   },
   {
-    title: 'IBOARD WEB',
-    image: '/bg-web-trading.png',
-    link: '/iboard'
+    title: "IBOARD WEB",
+    image: "/images/homepage/bg-web-trading.png",
+    link: "/iboard",
   },
   {
-    title: 'IBOARD PRO',
-    image: '/bg-mobile-trading.png',
-    link: '/iboard-pro'
+    title: "IBOARD PRO",
+    image: "/images/homepage/bg-mobile-trading.png",
+    link: "/iboard-pro",
   },
   {
-    title: 'TRUNG TÂM KIẾN THỨC',
-    image: '/bg-pro-trading.png',
-    link: '/knowledge-center'
+    title: "TRUNG TÂM KIẾN THỨC",
+    image: "/images/homepage/bg-pro-trading.png",
+    link: "/knowledge-center",
   },
 ];
 

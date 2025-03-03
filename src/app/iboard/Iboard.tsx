@@ -9,9 +9,10 @@ interface IboardProps {
 
 function Iboard({ initialStocks }: IboardProps) {
   const [stocks, setStocks] = useState<Stock[]>(initialStocks);
-
+  console.log('stocks',stocks);
   useEffect(() => {
-    const wsClient = new WebSocketClient('ws://localhost:3020');
+
+    const wsClient = new WebSocketClient(process.env.NEXT_PUBLIC_API_URL ||'ws://localhost:3020');
 
     wsClient.socket.onmessage = (event: MessageEvent) => {
       const updatedStock = JSON.parse(event.data) as Stock;

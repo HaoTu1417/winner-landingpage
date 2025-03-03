@@ -75,7 +75,6 @@ function TradingPlatform() {
             className={`m-6 w-auto h-auto bg-black text-white rounded-md hover:bg-black ${
               activeTab === tabs[1] ? "" : "hidden"
             }`}
-            
           />
           <ImageButton
             imageSrc="/images/homepage/apple-icon.svg"
@@ -85,7 +84,6 @@ function TradingPlatform() {
             className={`m-6 w-auto h-auto bg-black text-white rounded-md hover:bg-black ${
               activeTab === tabs[1] ? "" : "hidden"
             }`}
-            
           />
         </div>
       </div>

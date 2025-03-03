@@ -35,13 +35,13 @@ class HttpCore {
     return this.instance.get<T>(url, config);
   }
 
-  // POST request
-  public async post<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  // POST request (fix any -> T)
+  public async post<T, D = unknown>(url: string, data: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.instance.post<T>(url, data, config);
   }
 
-  // PUT request
-  public async put<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  // PUT request (fix any -> T)
+  public async put<T, D = unknown>(url: string, data: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.instance.put<T>(url, data, config);
   }
 

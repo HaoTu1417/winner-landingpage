@@ -1,151 +1,166 @@
 class Stock {
-    name: string;
-    ceiling: number;
-    roof: number;
-    reference: number;
-    match: Match;
-    orderBook: OrderBook;
-    forgein: Forgein;
-    vol: number;
-    high: number;
-    low: number;
-  
-    constructor(
-      name: string,
-      ceiling: number,
-      roof: number,
-      reference: number,
-      match: Match,
-      orderBook: OrderBook,
-      vol: number,
-      high: number,
-      low: number,
-      forgein: Forgein = new Forgein(0, 0, 0)
+  name: string;
+  ceiling: number;
+  floor: number;
+  reference: number;
+  match: Match;
+  orderBook: OrderBook;
+  volume: number;
+  high: number;
+  low: number;
+  updateTime: string;
+  isEnabled: number;
+  exchange: string;
+
+  constructor(
+    name: string,
+    ceiling: number,
+    floor: number,
+    reference: number,
+    match: Match,
+    orderBook: OrderBook,
+    volume: number,
+    high: number,
+    low: number,
+    updateTime: string,
+    isEnabled: number,
+    exchange: string
+  ) {
+    this.name = name;
+    this.ceiling = ceiling;
+    this.floor = floor;
+    this.reference = reference;
+    this.match = match;
+    this.orderBook = orderBook;
+    this.volume = volume;
+    this.high = high;
+    this.low = low;
+    this.updateTime = updateTime;
+    this.isEnabled = isEnabled;
+    //console.log("orderBook", orderBook);
+    this.exchange = exchange;
+  }
+  getBid(index: number):  string {
+    if (
+      this.orderBook &&
+      this.orderBook.bids &&
+      index < this.orderBook.bids.length
     ) {
-      this.name = name;
-      this.ceiling = ceiling;
-      this.roof = roof;
-      this.reference = reference;
-      this.match = match;
-      this.orderBook = orderBook;
-      this.forgein = forgein;
-      this.vol = vol;
-      this.high = high;
-      this.low = low;
+      const bid = this.orderBook.bids[index];
+
+      // Get current UTC time in hours and minutes
+      const now = new Date();
+      const utcHours = now.getUTCHours();
+      const utcMinutes = now.getUTCMinutes();
+
+      // Convert time to comparable integer values (e.g., 2:00 -> 200, 9:15 -> 915)
+      const currentTime = utcHours * 100 + utcMinutes;
+
+      // Define time ranges
+      const startSilentTime = 200; // 02:00 UTC
+      const endSilentTime = 915; // 09:15 UTC
+      const atcTimeStart = 730; // 07:30 UTC
+      const atcTimeEnd = 745;
+
+      if (bid === 0) {
+        if (currentTime >= startSilentTime && currentTime <= endSilentTime) {
+          return "";
+        }
+        if (currentTime >= atcTimeStart && currentTime <= atcTimeEnd) {
+          return "ATC";
+        }
+      }
+
+      return (bid / 1000).toFixed(2);
     }
-    
+
+    return "0"; // Return 0 if orderBook is undefined or index is out of bounds
   }
-  
-  class Match {
-    price: number;
-    volume: number;
-    change: number;
-    percentChange: number;
-  
-    constructor(price: number, vol: number, change: number, changeInPercent: number) {
-      this.price = price;
-      this.volume = vol;
-      this.change = change;
-      this.percentChange = changeInPercent;
-    }
+}
+
+class Match {
+  price: number;
+  volume: number;
+  change: number;
+  percentChange: string;
+  percent: number;
+  ratioChange: number;
+
+  constructor(
+    price: number,
+    volume: number,
+    reference: number,
+    ratioChange: number,
+    change:number) {
+    this.price = price;
+    this.volume = volume;
+    this.change = price - reference;
+    this.percentChange = ((this.change / reference) * 100).toFixed(2);
+    this.percent = (this.change / reference) * 100;
+    this.ratioChange = ratioChange;
+    this.change = change;
   }
-  
-  class OrderBook {
-    askPrice1: number;
-    askVolume1: number;
-    askPrice2: number;
-    askVolume2: number;
-    askPrice3: number;
-    askVolume3: number;
-    bidPrice1: number;
-    bidVolume1: number;
-    bidPrice2: number;
-    bidVolume2: number;
-    bidPrice3: number;
-    bidVolume3: number;
-  
-    constructor(
-      ask1Price: number,
-      ask1Vol: number,
-      ask2Price: number,
-      ask2Vol: number,
-      ask3Price: number,
-      ask3Vol: number,
-      bid1Price: number,
-      bid1Vol: number,
-      bid2Price: number,
-      bid2Vol: number,
-      bid3Price: number,
-      bid3Vol: number
-    ) {
-      this.askPrice1 = ask1Price;
-      this.askVolume1 = ask1Vol;
-      this.askPrice2 = ask2Price;
-      this.askVolume2 = ask2Vol;
-      this.askPrice3 = ask3Price;
-      this.askVolume3 = ask3Vol;
-      this.bidPrice1 = bid1Price;
-      this.bidVolume1 = bid1Vol;
-      this.bidPrice2 = bid2Price;
-      this.bidVolume2 = bid2Vol;
-      this.bidPrice3 = bid3Price;
-      this.bidVolume3 = bid3Vol;
-    }
+}
+
+class OrderBook {
+  asks: number[];
+  askSizes: number[];
+  bids: number[];
+  bidSizes: number[];
+
+  constructor(
+    asks: number[],
+    askSizes: number[],
+    bids: number[],
+    bidSizes: number[]
+  ) {
+    this.asks = asks;
+    this.askSizes = askSizes;
+    this.bids = bids;
+    this.bidSizes = bidSizes;
   }
-  
-  class Forgein {
-    buyVolume: number;
-    sellVolume: number;
-    totalValue: number;
-  
-    constructor(buy: number, sell: number, room: number) {
-      this.buyVolume = buy;
-      this.sellVolume = sell;
-      this.totalValue = room;
-    }
-  }
-  
-  function GetDefaultData(): Stock[] {
-    const stocks: Stock[] = [
-      new Stock(
-        'ACB',
-        27.0,
-        25.5,
-        26.75,
-        new Match(25, 231300, 0.0, 0.0),
-        new OrderBook(24.85, 233300, 24.9, 478000, 24.95, 220800, 25.0, 338100, 25.05, 219100, 25.1, 158200),
-        408100,
-        25.0,
-        24.8,
-        new Forgein(434000, 434000, 239548456)
-      ),
-      new Stock(
-        'BID',
-        43.2,
-        42.0,
-        42.5,
-        new Match(25, 231300, 0.0, 0.0),
-        new OrderBook(24.85, 233300, 24.9, 478000, 24.95, 220800, 25.0, 338100, 25.05, 219100, 25.1, 158200),
-        408100,
-        25.0,
-        24.8
-      ),
-      new Stock(
-        'FPT',
-        160.0,
-        159.0,
-        159.5,
-        new Match(25, 231300, 0.0, 0.0),
-        new OrderBook(24.85, 233300, 24.9, 478000, 24.95, 220800, 25.0, 338100, 25.05, 219100, 25.1, 158200),
-        408100,
-        25.0,
-        24.8
-      ),
-    ];
-  
-    return stocks;
-  }
-  
-  // Single export block
-  export { Stock, Match, OrderBook, Forgein, GetDefaultData };
-  
+}
+
+function parseStock(data: StockData): Stock {
+  return new Stock(
+    data.stock_name,
+    data.ceiling,
+    data.floor,
+    data.prev_day_c,
+    new Match(data.price, data.day_v, data.prev_day_c,0,0),
+    new OrderBook(
+      JSON.parse(data.asks),
+      JSON.parse(data.ask_sizes),
+      JSON.parse(data.bids),
+      JSON.parse(data.bid_sizes)
+    ),
+    data.day_v,
+    data.day_h,
+    data.day_l,
+    data.update_time,
+    data.is_enabled,
+    data.exchange
+  );
+}
+
+
+interface StockData {
+  stock_name: string;
+  ceiling: number;
+  floor: number;
+  prev_day_c: number;
+  price: number;
+  day_v: number;
+  day_h: number;
+  day_l: number;
+  update_time: string;
+  is_enabled: number;
+  asks: string; // Dữ liệu JSON dạng string
+  ask_sizes: string;
+  bids: string;
+  bid_sizes: string;
+  exchange:string;
+}
+
+// Export classes
+export { Stock, Match, OrderBook, parseStock };
