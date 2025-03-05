@@ -2,12 +2,12 @@
     "welcome": "Chào mừng",
     "description": "Đây là ví dụ để sử dụng đa ngôn ngữ.",
     "startNow":"Bắt đầu ngay",
-    "companyName":"Công ty Tài chính WFS",
+    "companyName":"Công ty tư vấn đầu tư WFS",
     "companySlogan": "Kiến tạo một trải nghiệm đầu tư Tích lũy riêng biệt",
     "companyProvide":"Chúng tôi mang đến",
-    "broker": "Môi Giới Chứng Khoán",
-    "securitiesServices": "Dịch Vụ Chứng Khoán",
-    "investorFundManagement": "Quản Lý Tiền Nhà Đầu Tư",
+    "broker": "Dịch vụ tư vấn",
+    "securitiesServices": "Giải pháp đầu tư",
+    "investorFundManagement": "Quản Lý tài sản",
     "financialServices": "Dịch Vụ Tài Chính",
     "portfolioManagement": "Quản Lý Danh Mục Đầu Tư",
     "corporateFinanceConsulting": "Tư Vấn Tài Chính Doanh Nghiệp",
@@ -24,6 +24,8 @@
     "bussinessCustomer": "Khách Hàng Doanh Nghiệp",
     "utility": "Tiện Ích",
     "supportTutorial":"Hỗ Trợ Hướng Dẫn",
-     "investmentPortal": "Thông Tin Đầu Tư"
+     "investmentPortal": "Trung tâm tin tức",
+     "marketIndexes":"Thông tin chỉ số thị trường",
+     "news":"Tin nổi bật"
 
   }
