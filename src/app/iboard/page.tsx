@@ -52,13 +52,22 @@ function Iboard() {
       setStocks((prevStocks) => {
         const index = stockIndex[updatedStockData.name];
         if (index >= 0) {
-          console.log("updatedStockData", updatedStockData.name);
+        
           const updatedStocks = [...prevStocks];
           const prevStock = updatedStocks[index];
 
           // Kiểm tra ô nào thay đổi và lưu vào changedCells
-          let newChangedCells = { ...changedCells };
+          const newChangedCells = { ...changedCells };
 
+          if (prevStock.ceiling !== updatedStockData.ceiling) {
+            newChangedCells[`${updatedStockData.name}-ceiling`] = true;
+          }
+          if (prevStock.floor !== updatedStockData.floor) {
+            newChangedCells[`${updatedStockData.name}-floor`] = true;
+          }
+           if (prevStock.reference !== updatedStockData.reference) {
+             newChangedCells[`${updatedStockData.name}-reference`] = true;
+           }
           if (prevStock.match.price !== updatedStockData.match.price) {
             newChangedCells[`${updatedStockData.name}-price`] = true;
           }
@@ -70,6 +79,24 @@ function Iboard() {
           ) {
             newChangedCells[`${updatedStockData.name}-bid1`] = true;
           }
+          if (
+            prevStock.orderBook.bidSizes[0] !==
+            updatedStockData.orderBook.bidSizes[0]
+          ) {
+            newChangedCells[`${updatedStockData.name}-bidVol1`] = true;
+          }
+
+           if (
+             prevStock.orderBook.bids[2] !== updatedStockData.orderBook.bids[2]
+           ) {
+             newChangedCells[`${updatedStockData.name}-bid3`] = true;
+           }
+           if (
+             prevStock.orderBook.bidSizes[2] !==
+             updatedStockData.orderBook.bidSizes[2]
+           ) {
+             newChangedCells[`${updatedStockData.name}-bidVol3`] = true;
+           }
           if (
             prevStock.orderBook.asks[0] !== updatedStockData.orderBook.asks[0]
           ) {
@@ -90,19 +117,23 @@ function Iboard() {
             updatedStockData.isEnabled,
             updatedStockData.exchange
           );
-
+            console.log(
+              "updatedStockData",
+              updatedStockData.name,
+              updatedStocks[index]
+            );
           setChangedCells(newChangedCells);
 
           // Reset trạng thái sau 0.5 giây
           setTimeout(() => {
             setChangedCells((prev) => {
-              let newState = { ...prev };
+              const newState = { ...prev };
               Object.keys(newChangedCells).forEach((key) => {
                 delete newState[key];
               });
               return newState;
             });
-          }, 500);
+          }, 1000);
 
           return updatedStocks;
         }
@@ -126,16 +157,60 @@ function Iboard() {
       <table className="w-full text-sm bg-gray-800 text-black rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-gray-300">
           <tr className="text-xs font-semibold border border-gray-700">
-            <th className="p-2 text-center border border-gray-700">Mã CK</th>
-            <th className="p-2 text-center border border-gray-700">Trần</th>
+            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+              Mã CK
+            </th>
+            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+              Trần
+            </th>
+            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+              Sàn
+            </th>
+            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+              TC
+            </th>
+            <th colSpan={6} className="p-2 text-center border border-gray-700">
+              Bên mua
+            </th>
+            <th colSpan={4} className="p-2 text-center border border-gray-700">
+              Khớp lệnh
+            </th>
+            <th colSpan={6} className="p-2 text-center border border-gray-700">
+              Bên bán
+            </th>
+            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+              Tổng KL
+            </th>
+            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+              Cao
+            </th>
+            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+              Thấp
+            </th>
+            <th colSpan={3} className="p-2 text-center border border-gray-700">
+              ĐTNN
+            </th>
+          </tr>
+          <tr className="text-xs font-normal border border-gray-700">
+            <th className="p-2 text-center border border-gray-700">Giá 3</th>
+            <th className="p-2 text-center border border-gray-700">KL 3</th>
+            <th className="p-2 text-center border border-gray-700">Giá 2</th>
+            <th className="p-2 text-center border border-gray-700">KL 2</th>
+            <th className="p-2 text-center border border-gray-700">Giá 1</th>
+            <th className="p-2 text-center border border-gray-700">KL 1</th>
             <th className="p-2 text-center border border-gray-700">Giá</th>
             <th className="p-2 text-center border border-gray-700">KL</th>
-            <th className="p-2 text-center border border-gray-700">
-              Giá Mua 1
-            </th>
-            <th className="p-2 text-center border border-gray-700">
-              Giá Bán 1
-            </th>
+            <th className="p-2 text-center border border-gray-700">+/-</th>
+            <th className="p-2 text-center border border-gray-700">+/- (%)</th>
+            <th className="p-2 text-center border border-gray-700">Giá 1</th>
+            <th className="p-2 text-center border border-gray-700">KL 1</th>
+            <th className="p-2 text-center border border-gray-700">Giá 2</th>
+            <th className="p-2 text-center border border-gray-700">KL 2</th>
+            <th className="p-2 text-center border border-gray-700">Giá 3</th>
+            <th className="p-2 text-center border border-gray-700">KL 3</th>
+            <th className="p-2 text-center border border-gray-700">NN mua</th>
+            <th className="p-2 text-center border border-gray-700">NN bán</th>
+            <th className="p-2 text-center border border-gray-700">Room</th>
           </tr>
         </thead>
         <tbody className="bg-black text-white">
@@ -145,20 +220,104 @@ function Iboard() {
 
               {/* Giá trần */}
               <td
-                className={`p-2 border border-gray-700 ${getTextColorClass(
-                  stock.match.price,
-                  stock.reference
-                )} ${
-                  changedCells[`${stock.ceiling}-price`]
+                className={`p-2 border border-gray-700 text-[#f23aff]  ${
+                  changedCells[`${stock.name}-ceiling`]
                     ? stock.match.price > stock.reference
                       ? "bg-green-500"
                       : "bg-red-500"
                     : ""
                 }`}
               >
-                {(stock.match.price / 1000).toFixed(2)}
+                {(stock.ceiling / 1000).toFixed(2)}
               </td>
 
+              {/* Giá sàn */}
+              <td
+                className={`p-2 border border-gray-700 text-[#00c9ff] ${
+                  changedCells[`${stock.name}-floor`]
+                    ? stock.match.price > stock.reference
+                      ? "bg-green-500"
+                      : "bg-red-500"
+                    : ""
+                }`}
+              >
+                {(stock.floor / 1000).toFixed(2)}
+              </td>
+
+              {/* Giá TC */}
+              <td
+                className={`p-2 border border-gray-700 text-[#FdFF12] ${
+                  changedCells[`${stock.name}-reference`]
+                    ? stock.match.price > stock.reference
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
+                    : ""
+                }`}
+              >
+                {(stock.reference / 1000).toFixed(2)}
+              </td>
+              {/* Giá mua 3 */}
+              <td
+                className={`p-2 border border-gray-700 ${getTextColorClass(
+                  stock.match.price,
+                  stock.reference
+                )} ${
+                  changedCells[`${stock.name}-bid3`]
+                    ? stock.match.price > stock.reference
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
+                    : ""
+                }`}
+              >
+                {(stock.orderBook.bids[2] / 1000).toFixed(2)}
+              </td>
+              {/* Vol mua 3 */}
+              <td
+                className={`p-2 border border-gray-700 ${getTextColorClass(
+                  stock.match.price,
+                  stock.reference
+                )} ${
+                  changedCells[`${stock.name}-bidVol3`]
+                    ? stock.match.price > stock.reference
+                      ? "bg-green-500  text-white"
+                      : "bg-red-500"
+                    : ""
+                }`}
+              >
+                {stock.orderBook.bidSizes[2].toLocaleString("en-US")}
+              </td>
+              <td>0</td>
+              <td>0</td>
+              {/* Giá mua 1 */}
+              <td
+                className={`p-2 border border-gray-700 ${getTextColorClass(
+                  stock.match.price,
+                  stock.reference
+                )} ${
+                  changedCells[`${stock.name}-bid1`]
+                    ? stock.match.price > stock.reference
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
+                    : ""
+                }`}
+              >
+                {(stock.orderBook.bids[0] / 1000).toFixed(2)}
+              </td>
+              {/* Vol mua 1 */}
+              <td
+                className={`p-2 border border-gray-700 ${getTextColorClass(
+                  stock.match.price,
+                  stock.reference
+                )} ${
+                  changedCells[`${stock.name}-bidVol1`]
+                    ? stock.match.price > stock.reference
+                      ? "bg-green-500  text-white"
+                      : "bg-red-500 text-white"
+                    : ""
+                }`}
+              >
+                {stock.orderBook.bidSizes[0].toLocaleString("en-US")}
+              </td>
               {/* Giá khớp lệnh */}
               <td
                 className={`p-2 border border-gray-700 ${getTextColorClass(
@@ -167,8 +326,8 @@ function Iboard() {
                 )} ${
                   changedCells[`${stock.name}-price`]
                     ? stock.match.price > stock.reference
-                      ? "bg-green-500"
-                      : "bg-red-500"
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
                     : ""
                 }`}
               >
@@ -178,28 +337,44 @@ function Iboard() {
               {/* Khối lượng khớp lệnh */}
               <td
                 className={`p-2 border border-gray-700 ${
-                  changedCells[`${stock.name}-volume`] ? "bg-blue-500" : ""
+                  changedCells[`${stock.name}-volume`]
+                    ? stock.match.price > stock.reference
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
+                    : ""
                 }`}
               >
                 {stock.match.volume.toLocaleString()}
               </td>
-
-              {/* Giá mua 1 */}
-              <td
-                className={`p-2 border border-gray-700 ${
-                  changedCells[`${stock.name}-bid1`] ? "bg-green-500" : ""
-                }`}
-              >
-                {(stock.orderBook.bids[0] / 1000).toFixed(2)}
-              </td>
+              <td>0</td>
+              <td>0</td>
 
               {/* Giá bán 1 */}
               <td
                 className={`p-2 border border-gray-700 ${
-                  changedCells[`${stock.name}-ask1`] ? "bg-red-500" : ""
+                  changedCells[`${stock.name}-ask1`]
+                    ? stock.match.price > stock.reference
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
+                    : ""
                 }`}
               >
                 {(stock.orderBook.asks[0] / 1000).toFixed(2)}
+              </td>
+              {/* Vol bán 1 */}
+              <td>0</td>
+
+              {/* Giá bán 1 */}
+              <td
+                className={`p-2 border border-gray-700 ${
+                  changedCells[`${stock.name}-ask1`]
+                    ? stock.match.price > stock.reference
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
+                    : ""
+                }`}
+              >
+                {(stock.orderBook.asks[1] / 1000).toFixed(2)}
               </td>
             </tr>
           ))}
