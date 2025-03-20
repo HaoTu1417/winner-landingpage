@@ -97,3 +97,53 @@ body {
   }
 }
 
+
+.tinymce-content h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tinymce-content h2 {
+  font-size: 1.75em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.tinymce-content h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.tinymce-content h4 {
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.tinymce-content h5 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.tinymce-content h6 {
+  font-size: 0.875em;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.tinymce-content p {
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.tinymce-content strong, .tinymce-content b {
+  font-weight: bold;
+}
+
+.tinymce-content em, .tinymce-content i {
+  font-style: italic;
+}

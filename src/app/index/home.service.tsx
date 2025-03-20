@@ -126,6 +126,12 @@ const ServiceSection: React.FC = () => {
           <h1 className="text-green-600 text-4xl font-bold mb-[2rem] leading-tight bg-[linear-gradient(89.95deg,#0D169E_0.08%,#1C8D54_105.53%)] bg-clip-text text-transparent">
             {t("companyProvide")}
           </h1>
+          <p className="mb-[3rem]">
+          Giải pháp tài chính thông minh, tối ưu lợi nhuận Ứng dụng công nghệ hiện đại cùng đội ngũ chuyên gia tài chính hàng đầu,
+chúng tôi cung cấp tư vấn đầu tư chuyên sâu, thông tin tài chính minh bạch, và các gói tài chính linh hoạt với lãi suất hấp dẫn nhất trên thị trường.
+Giúp bạn ra quyết định đúng đắn – An tâm đầu tư – Gia tăng tài sản.
+
+          </p>
 
           <div className="flex justify-center space-x-8 text-gray-600 hidden">
             <button
