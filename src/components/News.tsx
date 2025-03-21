@@ -1,12 +1,11 @@
 interface NewsArticle {
-    id:number,
+  id: number;
   title: string;
   thumbnail: string;
   shortDescription: string;
   content: string;
-  date_created?:string;
-
-
+  date_created?: string;
+  type?: string;
 }
 
 export default NewsArticle;
