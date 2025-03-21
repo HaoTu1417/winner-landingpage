@@ -52,7 +52,7 @@ const LanguageSelector: React.FC = () => {
   };
 
   return (
-    <div className="relative inline-block text-left z-50">
+    <div className="relative inline-block text-left z-50" style={{visibility:"hidden"}}>
       {/* Selected Language Button */}
       <button
         onClick={toggleDropdown}
