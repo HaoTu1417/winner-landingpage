@@ -1,7 +1,7 @@
 import NewsArticle from "@/components/News";
 import NewArticleCardSmall from "@/components/ui/news/NewArticleCardSmall";
 import { newsService } from "@/services/NewsService";
-import { Col, Empty, notification, Row, Spin } from "antd";
+import { notification, Spin } from "antd";
 import { useEffect, useState } from "react";
 
 const PAGE_SIZE = 12;

@@ -40,7 +40,7 @@ class HttpService {
   }
 
   get<T>(url: string, params: object = {}): Promise<AxiosResponse<T>> {
-    return this.api.get<T>(url, { params,withCredentials: true  });
+    return this.api.get<T>(url, { params,withCredentials: false  });
   }
 
   post<T>(url: string, data: object): Promise<AxiosResponse<T>> {

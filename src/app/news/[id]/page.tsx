@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import RelatedNews from "./news.relatedNews";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { formatDateTime } from "@/utils/datetime";
+import Link from "next/link";
 
 export default function Index() {
   const [notify, contextHolder] = notification.useNotification();
@@ -47,10 +48,10 @@ export default function Index() {
           <Breadcrumb
             items={[
               {
-                title: <a href="/">Trang chủ</a>,
+                title: <Link href="/">Trang chủ</Link>,
               },
               {
-                title: <a href="/news">Tin tức</a>,
+                title: <Link href="/news">Tin tức</Link>,
               },
               ...(newsDetails ? [{ title: newsDetails.title }] : []),
             ]}

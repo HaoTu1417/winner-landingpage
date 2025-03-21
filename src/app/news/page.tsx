@@ -17,6 +17,7 @@ import {
 import NewArticleCard from "@/components/ui/news/NewArticleCard";
 import { debounce } from "@/utils/debounce";
 import NewsFilters from "./news.filters";
+import Link from "next/link";
 
 const PAGE_SIZE = 12;
 
@@ -106,7 +107,7 @@ export default function Index() {
           <Breadcrumb
             items={[
               {
-                title: <a href="/">Trang chủ</a>,
+                title: <Link href="/">Trang chủ</Link>,
               },
               {
                 title: "Tin tức",
