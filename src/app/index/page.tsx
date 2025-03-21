@@ -159,7 +159,7 @@ function Index() {
             <p className="mt-4 text-lg sm:text-xl">{t("companySlogan")}</p>
             <button
               className=" mt-6 w-[15rem] h-[4rem] bg-green-600 px-6 py-3 rounded-full text-white text-2xl bg-gradient-to-b from-[#1ADB21] to-[#0C911A] shadow-[0px_0px_24px_rgba(174,255,97,0.35)]"
-              style={{ ...interFont, fontWeight: 530 }}
+              style={{ ...interFont, fontWeight: 530,visibility:"hidden" }} 
             >
               {t("startNow")}
             </button>
