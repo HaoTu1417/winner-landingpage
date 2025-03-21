@@ -2,20 +2,24 @@
 import React, { useState } from "react";
 import Footer from "../index/footer";
 import ServiceSection from "./home.service";
-import MarketIndex from "./home.market"
+import MarketIndex from "./home.market";
 // import TradingPlatform from "./home.tradingPlatform";
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "../ui/components/LanguageSelector";
 // import UIGrid from "./home.uigrid";
 import Image from "next/image";
-import News from './home.news';
-// import { usePathname } from "next/navigation";
+
+import { usePathname } from "next/navigation";
+import NewsArticle from "./home.news";
+
+
+
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const { t } = useTranslation();
-  // const pathname = usePathname();
+  const pathname = usePathname();
 
   const interFont = {
     fontFamily: "Inter",
@@ -31,9 +35,17 @@ function Index() {
   const companyNameStyle = {
     textShadow: "0px 0px 6px #C5FFD8",
   };
+//posts
+ 
+
+
+ 
 
   // Define an array of navigation items
-  //const navLinks = [];
+  const navLinks = [
+    { href: "/", label: "Trang chủ", extraClass: "inter" },
+    { href: "/news", label: "Tin tức" },
+  ];
 
   /**
    *  { href: "/", label: "Trang chủ", extraClass: "inter",  },
@@ -51,8 +63,8 @@ function Index() {
    */
 
   // Common classes for all links
-  // const commonClasses =
-  //   "mx-2 transition-all duration-300 hover:underline hover:text-[#0D169E]";
+  const commonClasses =
+    "mx-2 transition-all duration-300 hover:underline hover:text-[#0D169E]";
 
   return (
     <div className="font-sans text-black">
@@ -81,7 +93,7 @@ function Index() {
           </div>
 
           {/* Navigation Links */}
-          {/* <div className="hidden flex-row lg:flex" id="NavigationLink">
+          <div className="hidden flex-row lg:flex" id="NavigationLink">
             {navLinks.map((link, index) => {
               // For special link(s), add extra classes and inline styles conditionally
               const isSpecial = pathname === link.href;
@@ -102,7 +114,7 @@ function Index() {
                 </a>
               );
             })}
-          </div> */}
+          </div>
 
           <LanguageSelector />
         </div>
@@ -145,10 +157,12 @@ function Index() {
               {t("companyName")}
             </h1>
             <p className="mt-4 text-lg sm:text-xl">{t("companySlogan")}</p>
-            {/* <button className=" mt-6 w-[15rem] h-[4rem] bg-green-600 px-6 py-3 rounded-full text-white text-2xl bg-gradient-to-b from-[#1ADB21] to-[#0C911A] shadow-[0px_0px_24px_rgba(174,255,97,0.35)]"
-            style= {{...interFont,fontWeight:530}}>
+            <button
+              className=" mt-6 w-[15rem] h-[4rem] bg-green-600 px-6 py-3 rounded-full text-white text-2xl bg-gradient-to-b from-[#1ADB21] to-[#0C911A] shadow-[0px_0px_24px_rgba(174,255,97,0.35)]"
+              style={{ ...interFont, fontWeight: 530 }}
+            >
               {t("startNow")}
-            </button> */}
+            </button>
           </div>
 
           <div
@@ -177,6 +191,33 @@ function Index() {
           </div>
         </div>
 
+        {/* <div className="flex flex-col md:flex-row items-center justify-between p-8 bg-gray-100 rounded-lg shadow-lg"> */}
+      {/* Left Text Section */}
+      {/* <div className="md:w-1/2 p-6 rounded-lg" style={{
+        background: "linear-gradient(90deg, #F3F8FF 0%, #FFFFFF 100%)",
+        borderRadius: "16px"
+      }}>
+        <h2 className="text-2xl font-bold text-blue-900 mb-4">Dịch vụ của chúng tôi</h2>
+        <p className="text-gray-700">
+          Tư vấn đầu tư, thông tin tài chính, và giải pháp lãi suất tốt nhất. Dành
+          cho cả nhà đầu tư cá nhân và doanh nghiệp, chúng tôi cung cấp tư vấn
+          tài chính chuyên sâu, thông tin thị trường nhanh chóng, cùng các gói tài
+          chính linh hoạt với lãi suất cạnh tranh hàng đầu. Tận dụng cơ hội,
+          kiểm soát rủi ro, tối đa hóa lợi nhuận – cùng WFS phát triển bền vững.
+        </p>
+      </div> */}
+      
+      {/* Right Image Section */}
+      {/* <div className="md:w-1/2 flex justify-center relative">
+        <div className="relative  p-6 rounded-lg ">
+          <img
+            src="/images/homepage/div.order-1.png"
+            alt="Financial Services"
+          />
+        </div>
+      </div>
+    </div> */}
+
         <ServiceSection />
         <MarketIndex />
 
@@ -187,7 +228,7 @@ function Index() {
           }}
         >
           {/* <UIGrid /> */}
-          <News />
+          <NewsArticle />
         </div>
 
         {/* ...other sections */}
