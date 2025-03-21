@@ -39,27 +39,27 @@ const MarketIndex: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white py-10 ">
-      <div className="w-full flex items-center justify-center mb-[2rem] mt-[5rem]">
-        <h1 className="text-green-600 text-4xl font-bold mb-2 leading-tight bg-[linear-gradient(89.95deg,#0D169E_0.08%,#1C8D54_105.53%)] bg-clip-text text-transparent">
+    <div className="bg-white py-10">
+      <div className="mb-[2rem] mt-[5rem] flex w-full items-center justify-center">
+        <h1 className="mb-2 bg-[linear-gradient(89.95deg,#0D169E_0.08%,#1C8D54_105.53%)] bg-clip-text text-4xl font-bold leading-tight text-green-600 text-transparent">
           {t("marketIndexes")}
         </h1>
       </div>
 
       {/* index card */}
-      <div className="flex justify-center items-center">
-        <div className="grid grid-cols-1 md:grid-cols-3 w-[80%] gap-3">
+      <div className="flex items-center justify-center">
+        <div className="grid w-[80%] grid-cols-1 gap-3 md:grid-cols-3">
           {tabContent.map((item) => (
             <div
               key={item.key}
-              className="p-4 bg-white shadow-md rounded-3xl border border-gray-200"
+              className="rounded-3xl border border-gray-200 bg-white p-4 shadow-md"
             >
               <div className="flex flex-col">
-                <div className="linear-text-gradient font-bold text-2xl">
+                <div className="linear-text-gradient text-2xl font-bold">
                   {item.key}
                 </div>
               </div>
-              <div className="flex flex-row justify-between mt-[1rem]">
+              <div className="mt-[1rem] flex flex-row justify-between">
                 <div>
                   <span className="text-3xl font-bold text-red-500">
                     {item.value}
@@ -67,12 +67,12 @@ const MarketIndex: React.FC = () => {
                 </div>
                 <div className="flex flex-col items-end">
                   <span
-                    className={`text-2xl font-semibold flex items-center ${
+                    className={`flex items-center text-2xl font-semibold ${
                       item.growingState > 0
                         ? "text-green-500"
                         : item.growingState < 0
-                        ? "text-red-500"
-                        : "text-gray-500"
+                          ? "text-red-500"
+                          : "text-gray-500"
                     }`}
                   >
                     {item.change} ({item.changePercent})

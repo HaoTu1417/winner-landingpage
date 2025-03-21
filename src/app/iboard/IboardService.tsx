@@ -1,6 +1,6 @@
-import HttpCore from '@/lib/HttpCore';
-import { AxiosResponse } from 'axios';
-import { Stock } from './Stock';
+import HttpCore from "@/lib/HttpCore";
+import { AxiosResponse } from "axios";
+import { Stock } from "./Stock";
 
 // // Define types for iBoard data (optional)
 // interface StockData {
@@ -17,7 +17,7 @@ class IboardService extends HttpCore {
 
   // Method to get a list of stocks
   public async getStocks(): Promise<AxiosResponse<Stock[]>> {
-    return this.get<Stock[]>('/stocks');
+    return this.get<Stock[]>("/stocks");
   }
 
   // Method to get stock details by ID
@@ -27,10 +27,8 @@ class IboardService extends HttpCore {
 
   // Method to add a new stock (example)
   public async addStock(stock: Stock): Promise<AxiosResponse<Stock>> {
-    return this.post<Stock>('/stocks', stock);
+    return this.post<Stock>("/stocks", stock);
   }
-
-
 }
 
 export default IboardService;

@@ -1,11 +1,15 @@
-import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import axios, {
+  AxiosInstance,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
 
 class HttpService {
   private api: AxiosInstance;
 
   constructor(baseURL: string) {
     this.api = axios.create({
-      baseURL: baseURL,
+      baseURL,
       headers: {
         "Content-Type": "application/json",
       },
@@ -20,7 +24,7 @@ class HttpService {
         }
         return config;
       },
-      (error) => Promise.reject(error)
+      (error) => Promise.reject(error),
     );
 
     // Response interceptor
@@ -35,12 +39,12 @@ class HttpService {
           }
         }
         return Promise.reject(error);
-      }
+      },
     );
   }
 
   get<T>(url: string, params: object = {}): Promise<AxiosResponse<T>> {
-    return this.api.get<T>(url, { params,withCredentials: false  });
+    return this.api.get<T>(url, { params, withCredentials: false });
   }
 
   post<T>(url: string, data: object): Promise<AxiosResponse<T>> {

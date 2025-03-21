@@ -12,9 +12,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import NewsArticle from "./home.news";
 
-
-
-
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -35,11 +32,7 @@ function Index() {
   const companyNameStyle = {
     textShadow: "0px 0px 6px #C5FFD8",
   };
-//posts
- 
-
-
- 
+  //posts
 
   // Define an array of navigation items
   const navLinks = [
@@ -71,9 +64,9 @@ function Index() {
       {/* Header */}
       <header
         style={{ ...headerStyle, ...interFont }}
-        className="bg-white text-blue"
+        className="text-blue bg-white"
       >
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div className="container mx-auto flex items-center justify-between px-4 py-3">
           {/* Menu Toggle (Mobile) */}
           <button
             className="block lg:hidden"
@@ -84,10 +77,10 @@ function Index() {
           </button>
 
           {/* Logo */}
-          <div className="text-lg font-bold h-20">
+          <div className="h-20 text-lg font-bold">
             <img
               src="/images/LogoWFS.png"
-              className="object-contain h-full mr-2"
+              className="mr-2 h-full object-contain"
               alt="Logo"
             />
           </div>
@@ -148,18 +141,18 @@ function Index() {
 
       {/* Main Section */}
       <main>
-        <div className="relative bg-container h-[34rem] sm:h-[34rem] flex items-center justify-center text-white">
-          <div className="text-center z-10">
+        <div className="bg-container relative flex h-[34rem] items-center justify-center text-white sm:h-[34rem]">
+          <div className="z-10 text-center">
             <h1
-              className="text-3xl sm:text-5xl font-bold"
+              className="text-3xl font-bold sm:text-5xl"
               style={{ ...companyNameStyle, ...interFont }}
             >
               {t("companyName")}
             </h1>
             <p className="mt-4 text-lg sm:text-xl">{t("companySlogan")}</p>
             <button
-              className=" mt-6 w-[15rem] h-[4rem] bg-green-600 px-6 py-3 rounded-full text-white text-2xl bg-gradient-to-b from-[#1ADB21] to-[#0C911A] shadow-[0px_0px_24px_rgba(174,255,97,0.35)]"
-              style={{ ...interFont, fontWeight: 530,visibility:"hidden" }} 
+              className="mt-6 h-[4rem] w-[15rem] rounded-full bg-green-600 bg-gradient-to-b from-[#1ADB21] to-[#0C911A] px-6 py-3 text-2xl text-white shadow-[0px_0px_24px_rgba(174,255,97,0.35)]"
+              style={{ ...interFont, fontWeight: 530, visibility: "hidden" }}
             >
               {t("startNow")}
             </button>
@@ -192,8 +185,8 @@ function Index() {
         </div>
 
         {/* <div className="flex flex-col md:flex-row items-center justify-between p-8 bg-gray-100 rounded-lg shadow-lg"> */}
-      {/* Left Text Section */}
-      {/* <div className="md:w-1/2 p-6 rounded-lg" style={{
+        {/* Left Text Section */}
+        {/* <div className="md:w-1/2 p-6 rounded-lg" style={{
         background: "linear-gradient(90deg, #F3F8FF 0%, #FFFFFF 100%)",
         borderRadius: "16px"
       }}>
@@ -206,9 +199,9 @@ function Index() {
           kiểm soát rủi ro, tối đa hóa lợi nhuận – cùng WFS phát triển bền vững.
         </p>
       </div> */}
-      
-      {/* Right Image Section */}
-      {/* <div className="md:w-1/2 flex justify-center relative">
+
+        {/* Right Image Section */}
+        {/* <div className="md:w-1/2 flex justify-center relative">
         <div className="relative  p-6 rounded-lg ">
           <img
             src="/images/homepage/div.order-1.png"
@@ -222,7 +215,7 @@ function Index() {
         <MarketIndex />
 
         <div
-          className=" bg-cover bg-center"
+          className="bg-cover bg-center"
           style={{
             backgroundImage: "url('/images/homepage/serviceBackground.png')",
           }}

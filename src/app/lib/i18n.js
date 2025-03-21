@@ -1,12 +1,12 @@
-'use client'; // Ensures this runs only on the client side
+"use client"; // Ensures this runs only on the client side
 
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
 // Import your translation files
-import enTranslation from './public/locales/en/translation.json';
-import viTranslation from './public/locales/vi/translation.json';
-import cnTranslation from './public/locales/cn/translation.json';
+import enTranslation from "./public/locales/en/translation.json";
+import viTranslation from "./public/locales/vi/translation.json";
+import cnTranslation from "./public/locales/cn/translation.json";
 
 // Check if i18n has already been initialized to avoid reinitializing
 if (!i18n.isInitialized) {
@@ -18,8 +18,8 @@ if (!i18n.isInitialized) {
         vi: { translation: viTranslation },
         cn: { translation: cnTranslation },
       },
-      lng: 'en', // Default language
-      fallbackLng: 'en',
+      lng: "en", // Default language
+      fallbackLng: "en",
       interpolation: {
         escapeValue: false, // React already handles escaping
       },

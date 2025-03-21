@@ -1,0 +1,19 @@
+.markdown p {
+  margin-bottom: 16px;
+}
+
+.markdown img {
+  margin: 0 auto;
+}
+
+.markdown ol {
+  list-style: decimal;
+  list-style-position: inside;
+  margin-bottom: 16px;
+}
+
+.markdown ul {
+  list-style: disc;
+  list-style-position: inside;
+  margin-bottom: 16px;
+}

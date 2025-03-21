@@ -1,9 +1,8 @@
-import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
-import Link from 'next/link';
+import Image from "next/image";
+import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 const cards = [
-
   {
     title: "Tin tức bất động sản",
     image: "/images/homepage/bg-mobile-trading.png",
@@ -34,21 +33,17 @@ export default function UIGrid() {
   const { t } = useTranslation();
 
   return (
-    <div
-      className="p-6 bg-cover bg-center mt-[3rem]"
-      id="parent"
-      
-    >
+    <div className="mt-[3rem] bg-cover bg-center p-6" id="parent">
       <div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 linear-text-gradient2 mb-[4rem] ">
+        <h2 className="linear-text-gradient2 mb-6 mb-[4rem] text-center text-2xl font-bold sm:text-3xl">
           {t("investmentPortal")}
         </h2>
       </div>
-      <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+      <div className="mx-auto grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
         {cards.map((card, index) => (
           <Link href={card.link} key={index}>
             <div
-              className="relative group bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transition-transform transform hover:scale-105 w-full"
+              className="group relative w-full transform cursor-pointer overflow-hidden rounded-lg bg-white shadow-lg transition-transform hover:scale-105"
               style={{ height: "20rem" }}
             >
               <Image
@@ -58,7 +53,7 @@ export default function UIGrid() {
                 style={{ objectFit: "cover" }}
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-60"></div>
-              <h3 className="absolute bottom-4 left-4 text-white text-lg font-semibold group-hover:text-xl transition-all">
+              <h3 className="absolute bottom-4 left-4 text-lg font-semibold text-white transition-all group-hover:text-xl">
                 {card.title}
               </h3>
             </div>

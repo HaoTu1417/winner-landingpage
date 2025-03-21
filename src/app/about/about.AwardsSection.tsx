@@ -38,20 +38,20 @@ const AwardsSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
-    <div className="max-w-7xl mx-auto px-8 py-16">
-      <h2 className="text-3xl font-semibold text-center mb-4 text-green-600">
+    <div className="mx-auto max-w-7xl px-8 py-16">
+      <h2 className="mb-4 text-center text-3xl font-semibold text-green-600">
         Giải thưởng
       </h2>
-      <p className="text-center text-gray-600 mb-8">
+      <p className="mb-8 text-center text-gray-600">
         SSIAM vinh dự đón nhận những giải thưởng danh giá từ nhiều tổ chức uy
         tín, khẳng định vị thế hàng đầu trong lĩnh vực quản lý tài sản ở Việt
         Nam.
       </p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Main Award Slide */}
         <div className="relative col-span-2">
-          <div className="relative w-full h-64">
+          <div className="relative h-64 w-full">
             <Image
               src={awards[currentIndex].image}
               alt={awards[currentIndex].title}
@@ -61,7 +61,7 @@ const AwardsSection: React.FC = () => {
             />
           </div>
 
-          <div className="absolute bottom-0 left-0 p-6 bg-white bg-opacity-90 rounded-b-lg w-full">
+          <div className="absolute bottom-0 left-0 w-full rounded-b-lg bg-white bg-opacity-90 p-6">
             <h3 className="text-lg font-semibold text-gray-800">
               {awards[currentIndex].title}
             </h3>
@@ -70,7 +70,7 @@ const AwardsSection: React.FC = () => {
             </p>
             <a
               href={awards[currentIndex].link}
-              className="mt-2 inline-block text-green-600 font-medium hover:underline"
+              className="mt-2 inline-block font-medium text-green-600 hover:underline"
             >
               Xem thêm →
             </a>
@@ -83,7 +83,7 @@ const AwardsSection: React.FC = () => {
             <div
               key={award.id}
               onClick={() => setCurrentIndex(index)}
-              className={`p-6 rounded-lg shadow-md cursor-pointer ${
+              className={`cursor-pointer rounded-lg p-6 shadow-md ${
                 currentIndex === index
                   ? "bg-green-700 text-white"
                   : "bg-gray-100 text-gray-800"

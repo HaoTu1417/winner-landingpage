@@ -6,7 +6,7 @@ import { WebSocketClient } from "@/lib/WebSocketClient";
 function Iboard() {
   const [stocks, setStocks] = useState<Stock[]>([]);
   const [changedCells, setChangedCells] = useState<{ [key: string]: boolean }>(
-    {}
+    {},
   );
 
   const stockNames = ["VCB", "ACB", "HCM"];
@@ -28,7 +28,7 @@ function Iboard() {
         0,
         "",
         0,
-        "VN"
+        "VN",
       );
     });
     setStocks(tempStocks);
@@ -38,21 +38,19 @@ function Iboard() {
   useEffect(() => {
     initStocks();
     const wsClient = new WebSocketClient(
-      process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || "ws://localhost:3021"
+      process.env.NEXT_PUBLIC_SOCKET_SERVER_URL || "ws://localhost:3021",
     );
 
     wsClient.socket.onmessage = (event: MessageEvent) => {
       if (!isInitDone) {
         console.log("init not done");
         return;
-
       }
       const updatedStockData = JSON.parse(event.data);
       // console.log("updatedStockData", updatedStockData);
       setStocks((prevStocks) => {
         const index = stockIndex[updatedStockData.name];
         if (index >= 0) {
-        
           const updatedStocks = [...prevStocks];
           const prevStock = updatedStocks[index];
 
@@ -65,9 +63,9 @@ function Iboard() {
           if (prevStock.floor !== updatedStockData.floor) {
             newChangedCells[`${updatedStockData.name}-floor`] = true;
           }
-           if (prevStock.reference !== updatedStockData.reference) {
-             newChangedCells[`${updatedStockData.name}-reference`] = true;
-           }
+          if (prevStock.reference !== updatedStockData.reference) {
+            newChangedCells[`${updatedStockData.name}-reference`] = true;
+          }
           if (prevStock.match.price !== updatedStockData.match.price) {
             newChangedCells[`${updatedStockData.name}-price`] = true;
           }
@@ -86,17 +84,17 @@ function Iboard() {
             newChangedCells[`${updatedStockData.name}-bidVol1`] = true;
           }
 
-           if (
-             prevStock.orderBook.bids[2] !== updatedStockData.orderBook.bids[2]
-           ) {
-             newChangedCells[`${updatedStockData.name}-bid3`] = true;
-           }
-           if (
-             prevStock.orderBook.bidSizes[2] !==
-             updatedStockData.orderBook.bidSizes[2]
-           ) {
-             newChangedCells[`${updatedStockData.name}-bidVol3`] = true;
-           }
+          if (
+            prevStock.orderBook.bids[2] !== updatedStockData.orderBook.bids[2]
+          ) {
+            newChangedCells[`${updatedStockData.name}-bid3`] = true;
+          }
+          if (
+            prevStock.orderBook.bidSizes[2] !==
+            updatedStockData.orderBook.bidSizes[2]
+          ) {
+            newChangedCells[`${updatedStockData.name}-bidVol3`] = true;
+          }
           if (
             prevStock.orderBook.asks[0] !== updatedStockData.orderBook.asks[0]
           ) {
@@ -115,13 +113,13 @@ function Iboard() {
             updatedStockData.low,
             updatedStockData.updateTime,
             updatedStockData.isEnabled,
-            updatedStockData.exchange
+            updatedStockData.exchange,
           );
-            console.log(
-              "updatedStockData",
-              updatedStockData.name,
-              updatedStocks[index]
-            );
+          console.log(
+            "updatedStockData",
+            updatedStockData.name,
+            updatedStocks[index],
+          );
           setChangedCells(newChangedCells);
 
           // Reset trạng thái sau 0.5 giây
@@ -154,73 +152,73 @@ function Iboard() {
 
   return (
     <div className="p-4">
-      <table className="w-full text-sm bg-gray-800 text-black rounded-lg overflow-hidden">
+      <table className="w-full overflow-hidden rounded-lg bg-gray-800 text-sm text-black">
         <thead className="bg-gray-800 text-gray-300">
-          <tr className="text-xs font-semibold border border-gray-700">
-            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+          <tr className="border border-gray-700 text-xs font-semibold">
+            <th rowSpan={2} className="border border-gray-700 p-2 text-center">
               Mã CK
             </th>
-            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+            <th rowSpan={2} className="border border-gray-700 p-2 text-center">
               Trần
             </th>
-            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+            <th rowSpan={2} className="border border-gray-700 p-2 text-center">
               Sàn
             </th>
-            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+            <th rowSpan={2} className="border border-gray-700 p-2 text-center">
               TC
             </th>
-            <th colSpan={6} className="p-2 text-center border border-gray-700">
+            <th colSpan={6} className="border border-gray-700 p-2 text-center">
               Bên mua
             </th>
-            <th colSpan={4} className="p-2 text-center border border-gray-700">
+            <th colSpan={4} className="border border-gray-700 p-2 text-center">
               Khớp lệnh
             </th>
-            <th colSpan={6} className="p-2 text-center border border-gray-700">
+            <th colSpan={6} className="border border-gray-700 p-2 text-center">
               Bên bán
             </th>
-            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+            <th rowSpan={2} className="border border-gray-700 p-2 text-center">
               Tổng KL
             </th>
-            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+            <th rowSpan={2} className="border border-gray-700 p-2 text-center">
               Cao
             </th>
-            <th rowSpan={2} className="p-2 text-center border border-gray-700">
+            <th rowSpan={2} className="border border-gray-700 p-2 text-center">
               Thấp
             </th>
-            <th colSpan={3} className="p-2 text-center border border-gray-700">
+            <th colSpan={3} className="border border-gray-700 p-2 text-center">
               ĐTNN
             </th>
           </tr>
-          <tr className="text-xs font-normal border border-gray-700">
-            <th className="p-2 text-center border border-gray-700">Giá 3</th>
-            <th className="p-2 text-center border border-gray-700">KL 3</th>
-            <th className="p-2 text-center border border-gray-700">Giá 2</th>
-            <th className="p-2 text-center border border-gray-700">KL 2</th>
-            <th className="p-2 text-center border border-gray-700">Giá 1</th>
-            <th className="p-2 text-center border border-gray-700">KL 1</th>
-            <th className="p-2 text-center border border-gray-700">Giá</th>
-            <th className="p-2 text-center border border-gray-700">KL</th>
-            <th className="p-2 text-center border border-gray-700">+/-</th>
-            <th className="p-2 text-center border border-gray-700">+/- (%)</th>
-            <th className="p-2 text-center border border-gray-700">Giá 1</th>
-            <th className="p-2 text-center border border-gray-700">KL 1</th>
-            <th className="p-2 text-center border border-gray-700">Giá 2</th>
-            <th className="p-2 text-center border border-gray-700">KL 2</th>
-            <th className="p-2 text-center border border-gray-700">Giá 3</th>
-            <th className="p-2 text-center border border-gray-700">KL 3</th>
-            <th className="p-2 text-center border border-gray-700">NN mua</th>
-            <th className="p-2 text-center border border-gray-700">NN bán</th>
-            <th className="p-2 text-center border border-gray-700">Room</th>
+          <tr className="border border-gray-700 text-xs font-normal">
+            <th className="border border-gray-700 p-2 text-center">Giá 3</th>
+            <th className="border border-gray-700 p-2 text-center">KL 3</th>
+            <th className="border border-gray-700 p-2 text-center">Giá 2</th>
+            <th className="border border-gray-700 p-2 text-center">KL 2</th>
+            <th className="border border-gray-700 p-2 text-center">Giá 1</th>
+            <th className="border border-gray-700 p-2 text-center">KL 1</th>
+            <th className="border border-gray-700 p-2 text-center">Giá</th>
+            <th className="border border-gray-700 p-2 text-center">KL</th>
+            <th className="border border-gray-700 p-2 text-center">+/-</th>
+            <th className="border border-gray-700 p-2 text-center">+/- (%)</th>
+            <th className="border border-gray-700 p-2 text-center">Giá 1</th>
+            <th className="border border-gray-700 p-2 text-center">KL 1</th>
+            <th className="border border-gray-700 p-2 text-center">Giá 2</th>
+            <th className="border border-gray-700 p-2 text-center">KL 2</th>
+            <th className="border border-gray-700 p-2 text-center">Giá 3</th>
+            <th className="border border-gray-700 p-2 text-center">KL 3</th>
+            <th className="border border-gray-700 p-2 text-center">NN mua</th>
+            <th className="border border-gray-700 p-2 text-center">NN bán</th>
+            <th className="border border-gray-700 p-2 text-center">Room</th>
           </tr>
         </thead>
         <tbody className="bg-black text-white">
           {stocks.map((stock) => (
-            <tr key={stock.name} className="text-center border border-gray-700">
-              <td className="p-2 border border-gray-700">{stock.name}</td>
+            <tr key={stock.name} className="border border-gray-700 text-center">
+              <td className="border border-gray-700 p-2">{stock.name}</td>
 
               {/* Giá trần */}
               <td
-                className={`p-2 border border-gray-700 text-[#f23aff]  ${
+                className={`border border-gray-700 p-2 text-[#f23aff] ${
                   changedCells[`${stock.name}-ceiling`]
                     ? stock.match.price > stock.reference
                       ? "bg-green-500"
@@ -233,7 +231,7 @@ function Iboard() {
 
               {/* Giá sàn */}
               <td
-                className={`p-2 border border-gray-700 text-[#00c9ff] ${
+                className={`border border-gray-700 p-2 text-[#00c9ff] ${
                   changedCells[`${stock.name}-floor`]
                     ? stock.match.price > stock.reference
                       ? "bg-green-500"
@@ -246,7 +244,7 @@ function Iboard() {
 
               {/* Giá TC */}
               <td
-                className={`p-2 border border-gray-700 text-[#FdFF12] ${
+                className={`border border-gray-700 p-2 text-[#FdFF12] ${
                   changedCells[`${stock.name}-reference`]
                     ? stock.match.price > stock.reference
                       ? "bg-green-500 text-white"
@@ -258,9 +256,9 @@ function Iboard() {
               </td>
               {/* Giá mua 3 */}
               <td
-                className={`p-2 border border-gray-700 ${getTextColorClass(
+                className={`border border-gray-700 p-2 ${getTextColorClass(
                   stock.match.price,
-                  stock.reference
+                  stock.reference,
                 )} ${
                   changedCells[`${stock.name}-bid3`]
                     ? stock.match.price > stock.reference
@@ -273,13 +271,13 @@ function Iboard() {
               </td>
               {/* Vol mua 3 */}
               <td
-                className={`p-2 border border-gray-700 ${getTextColorClass(
+                className={`border border-gray-700 p-2 ${getTextColorClass(
                   stock.match.price,
-                  stock.reference
+                  stock.reference,
                 )} ${
                   changedCells[`${stock.name}-bidVol3`]
                     ? stock.match.price > stock.reference
-                      ? "bg-green-500  text-white"
+                      ? "bg-green-500 text-white"
                       : "bg-red-500"
                     : ""
                 }`}
@@ -290,9 +288,9 @@ function Iboard() {
               <td>0</td>
               {/* Giá mua 1 */}
               <td
-                className={`p-2 border border-gray-700 ${getTextColorClass(
+                className={`border border-gray-700 p-2 ${getTextColorClass(
                   stock.match.price,
-                  stock.reference
+                  stock.reference,
                 )} ${
                   changedCells[`${stock.name}-bid1`]
                     ? stock.match.price > stock.reference
@@ -305,13 +303,13 @@ function Iboard() {
               </td>
               {/* Vol mua 1 */}
               <td
-                className={`p-2 border border-gray-700 ${getTextColorClass(
+                className={`border border-gray-700 p-2 ${getTextColorClass(
                   stock.match.price,
-                  stock.reference
+                  stock.reference,
                 )} ${
                   changedCells[`${stock.name}-bidVol1`]
                     ? stock.match.price > stock.reference
-                      ? "bg-green-500  text-white"
+                      ? "bg-green-500 text-white"
                       : "bg-red-500 text-white"
                     : ""
                 }`}
@@ -320,9 +318,9 @@ function Iboard() {
               </td>
               {/* Giá khớp lệnh */}
               <td
-                className={`p-2 border border-gray-700 ${getTextColorClass(
+                className={`border border-gray-700 p-2 ${getTextColorClass(
                   stock.match.price,
-                  stock.reference
+                  stock.reference,
                 )} ${
                   changedCells[`${stock.name}-price`]
                     ? stock.match.price > stock.reference
@@ -336,7 +334,7 @@ function Iboard() {
 
               {/* Khối lượng khớp lệnh */}
               <td
-                className={`p-2 border border-gray-700 ${
+                className={`border border-gray-700 p-2 ${
                   changedCells[`${stock.name}-volume`]
                     ? stock.match.price > stock.reference
                       ? "bg-green-500 text-white"
@@ -351,7 +349,7 @@ function Iboard() {
 
               {/* Giá bán 1 */}
               <td
-                className={`p-2 border border-gray-700 ${
+                className={`border border-gray-700 p-2 ${
                   changedCells[`${stock.name}-ask1`]
                     ? stock.match.price > stock.reference
                       ? "bg-green-500 text-white"
@@ -366,7 +364,7 @@ function Iboard() {
 
               {/* Giá bán 1 */}
               <td
-                className={`p-2 border border-gray-700 ${
+                className={`border border-gray-700 p-2 ${
                   changedCells[`${stock.name}-ask1`]
                     ? stock.match.price > stock.reference
                       ? "bg-green-500 text-white"
