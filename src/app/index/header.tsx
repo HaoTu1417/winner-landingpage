@@ -34,8 +34,8 @@ const Header = () => {
 
   return (
     <>
-      <header style={headerStyle} className="bg-white text-blue">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+      <header style={headerStyle} className="text-blue bg-white">
+        <div className="container mx-auto flex items-center justify-between px-4 py-3">
           <button
             className="block lg:hidden"
             onClick={toggleMenu}
@@ -45,7 +45,7 @@ const Header = () => {
           </button>
 
           {/* Logo */}
-          <div className="text-lg font-bold h-20 relative w-40">
+          <div className="relative h-20 w-40 text-lg font-bold">
             <Image
               src="/images/LogoWFS.png"
               layout="fill"
@@ -82,7 +82,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <nav className="top-full left-0 bg-black text-white w-full lg:hidden">
+        <nav className="left-0 top-full w-full bg-black text-white lg:hidden">
           <div className="flex flex-col space-y-2 p-4">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} className="block py-2">

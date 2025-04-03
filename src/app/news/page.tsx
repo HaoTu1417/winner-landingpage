@@ -32,7 +32,7 @@ export default function Index() {
   const [totalNews, setTotalNews] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [newsTypes, setNewsTypes] = useState<{ text: string; value: string }[]>(
-    []
+    [],
   );
   const [filters, setFilters] = useState<Filters>({ type: "" });
   const [search, setSearch] = useState<string>("");
@@ -60,7 +60,7 @@ export default function Index() {
           }
           return obj;
         },
-        {}
+        {},
       );
 
       const res = await newsService.getNews({
@@ -87,7 +87,7 @@ export default function Index() {
     debounce((value: string) => {
       setSearch(value);
     }),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -103,7 +103,7 @@ export default function Index() {
       {contextHolder}
       <Header />
       <div className="container mx-auto px-4">
-        <div className="flex justify-between flex-wrap gap-4">
+        <div className="flex flex-wrap justify-between gap-4">
           <Breadcrumb
             items={[
               {
@@ -121,7 +121,7 @@ export default function Index() {
             />
           </div>
         </div>
-        <div className="min-h-[60vh] my-6">
+        <div className="my-6 min-h-[60vh]">
           <Row gutter={[24, 24]}>
             <Col span={24} order={2} md={{ span: 18, order: 1 }}>
               {loading && (
@@ -145,7 +145,7 @@ export default function Index() {
                           </Col>
                         ))}
                       </Row>
-                      <div className="flex justify-center mt-8">
+                      <div className="mt-8 flex justify-center">
                         <Pagination
                           current={currentPage}
                           pageSize={PAGE_SIZE}

@@ -13,30 +13,32 @@ export class WebSocketClient {
   private initializeEvents(): void {
     // Handle connection open
     this.socket.onopen = () => {
-      console.log('WebSocket connection opened');
+      console.log("WebSocket connection opened");
       // Send an initial message if needed
-      this.sendMessage({ type: 'subscribe', channel: 'stocks' });
+      this.sendMessage({ type: "subscribe", channel: "stocks" });
     };
 
     // Handle incoming messages
     this.socket.onmessage = (event: MessageEvent) => {
-      console.log('Message received:', event.data);
+      console.log("Message received:", event.data);
       try {
         const data: WebSocketMessage = JSON.parse(event.data);
         this.handleMessage(data);
       } catch (error) {
-        console.error('Failed to parse WebSocket message:', error);
+        console.error("Failed to parse WebSocket message:", error);
       }
     };
 
     // Handle connection errors
     this.socket.onerror = (error: Event) => {
-      console.error('WebSocket error:', error);
+      console.error("WebSocket error:", error);
     };
 
     // Handle connection close
     this.socket.onclose = (event: CloseEvent) => {
-      console.log(`WebSocket connection closed: code=${event.code}, reason=${event.reason}`);
+      console.log(
+        `WebSocket connection closed: code=${event.code}, reason=${event.reason}`,
+      );
     };
   }
 
@@ -45,16 +47,16 @@ export class WebSocketClient {
     if (this.socket.readyState === WebSocket.OPEN) {
       this.socket.send(JSON.stringify(message));
     } else {
-      console.warn('WebSocket is not open. Unable to send message.');
+      console.warn("WebSocket is not open. Unable to send message.");
     }
   }
 
   // Handle received messages
   private handleMessage(data: WebSocketMessage): void {
-    console.log('handleMessage', data);
+    console.log("handleMessage", data);
     // Process data (customize this based on your data structure)
-    if (data.type === 'update' && data.channel === 'stocks') {
-      console.log('Stock update:', data.payload);
+    if (data.type === "update" && data.channel === "stocks") {
+      console.log("Stock update:", data.payload);
     }
   }
 

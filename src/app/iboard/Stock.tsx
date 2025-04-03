@@ -24,7 +24,7 @@ class Stock {
     low: number,
     updateTime: string,
     isEnabled: number,
-    exchange: string
+    exchange: string,
   ) {
     this.name = name;
     this.ceiling = ceiling;
@@ -40,7 +40,7 @@ class Stock {
     //console.log("orderBook", orderBook);
     this.exchange = exchange;
   }
-  getBid(index: number):  string {
+  getBid(index: number): string {
     if (
       this.orderBook &&
       this.orderBook.bids &&
@@ -91,7 +91,8 @@ class Match {
     volume: number,
     reference: number,
     ratioChange: number,
-    change:number) {
+    change: number,
+  ) {
     this.price = price;
     this.volume = volume;
     this.change = price - reference;
@@ -112,7 +113,7 @@ class OrderBook {
     asks: number[],
     askSizes: number[],
     bids: number[],
-    bidSizes: number[]
+    bidSizes: number[],
   ) {
     this.asks = asks;
     this.askSizes = askSizes;
@@ -127,22 +128,21 @@ function parseStock(data: StockData): Stock {
     data.ceiling,
     data.floor,
     data.prev_day_c,
-    new Match(data.price, data.day_v, data.prev_day_c,0,0),
+    new Match(data.price, data.day_v, data.prev_day_c, 0, 0),
     new OrderBook(
       JSON.parse(data.asks),
       JSON.parse(data.ask_sizes),
       JSON.parse(data.bids),
-      JSON.parse(data.bid_sizes)
+      JSON.parse(data.bid_sizes),
     ),
     data.day_v,
     data.day_h,
     data.day_l,
     data.update_time,
     data.is_enabled,
-    data.exchange
+    data.exchange,
   );
 }
-
 
 interface StockData {
   stock_name: string;
@@ -159,7 +159,7 @@ interface StockData {
   ask_sizes: string;
   bids: string;
   bid_sizes: string;
-  exchange:string;
+  exchange: string;
 }
 
 // Export classes

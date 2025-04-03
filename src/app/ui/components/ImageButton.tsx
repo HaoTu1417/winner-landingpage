@@ -18,9 +18,13 @@ const ImageButton: React.FC<ImageButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 ${className}`}
+      className={`flex items-center rounded bg-green-500 px-4 py-2 font-semibold text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 ${className}`}
     >
-      <img src={imageSrc} alt={altText} className="w-full h-full mr-2 object-cover" />
+      <img
+        src={imageSrc}
+        alt={altText}
+        className="mr-2 h-full w-full object-cover"
+      />
       {buttonText}
     </button>
   );

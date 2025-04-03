@@ -44,7 +44,7 @@ export default function Index() {
       {contextHolder}
       <Header />
       <div className="container mx-auto px-4">
-        <div className="flex justify-between flex-wrap gap-4">
+        <div className="flex flex-wrap justify-between gap-4">
           <Breadcrumb
             items={[
               {
@@ -57,7 +57,7 @@ export default function Index() {
             ]}
           />
         </div>
-        <div className="min-h-[60vh] my-6">
+        <div className="my-6 min-h-[60vh]">
           <Row gutter={[24, 24]}>
             <Col span={24} xl={{ span: 16, offset: 4 }}>
               {loading && (
@@ -74,16 +74,16 @@ export default function Index() {
                       <h1 className="text-4xl font-bold">
                         {newsDetails.title}
                       </h1>
-                      <div className="text-gray-400 mt-2">
+                      <div className="mt-2 text-gray-400">
                         {formatDateTime(newsDetails.date_created)}
                       </div>
                       <div className="mt-6">
                         <img
                           src={newsService.getThumbnailUrl(
-                            newsDetails.thumbnail
+                            newsDetails.thumbnail,
                           )}
                           alt={newsDetails.title}
-                          className="w-full h-auto"
+                          className="h-auto w-full"
                         />
                       </div>
                       <p className="mt-6 text-lg font-semibold">

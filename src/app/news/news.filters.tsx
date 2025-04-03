@@ -15,13 +15,13 @@ export default function NewsFilters({
 }: NewsFiltersProps) {
   return (
     <div>
-      <h3 className="px-4 py-2 bg-[#0D169E] rounded-md font-bold text-white">
+      <h3 className="rounded-md bg-[#0D169E] px-4 py-2 font-bold text-white">
         {title}
       </h3>
 
       <button
         className={cn(
-          "block w-full py-2 px-4 rounded-md text-left hover:bg-gray-100"
+          "block w-full rounded-md px-4 py-2 text-left hover:bg-gray-100",
         )}
         onClick={() => onChange("")}
       >
@@ -31,10 +31,10 @@ export default function NewsFilters({
       {options.map((option) => (
         <button
           className={cn(
-            "block w-full py-2 px-4 rounded-md text-left hover:bg-gray-100",
+            "block w-full rounded-md px-4 py-2 text-left hover:bg-gray-100",
             {
               "text-[#0D169E]": value === option.value,
-            }
+            },
           )}
           key={option.value}
           onClick={() => onChange(option.value)}

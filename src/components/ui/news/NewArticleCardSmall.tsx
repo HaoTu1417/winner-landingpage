@@ -17,27 +17,27 @@ export default function NewArticleCardSmall({
     <a href={`/news/${article.id}`} title={article.title}>
       <Card
         className={cn(
-          "w-full flex flex-col sm:flex-row rounded-[32px] overflow-hidden shadow-none",
-          className
+          "flex w-full flex-col overflow-hidden rounded-[32px] shadow-none sm:flex-row",
+          className,
         )}
       >
         <img
           src={newsService.getThumbnailUrl(article.thumbnail)}
           alt={article.title}
-          className="w-auto h-full aspect-[538/338] object-cover"
+          className="aspect-[538/338] h-full w-auto object-cover"
         />
-        <CardContent className="flex-1 flex flex-col p-6">
-          <h3 className="text-base font-bold inter line-clamp-1 hover:text-[#0D169E]">
+        <CardContent className="flex flex-1 flex-col p-6">
+          <h3 className="inter line-clamp-1 text-base font-bold hover:text-[#0D169E]">
             {article.title}
           </h3>
-          <p className="mt-2 mb-6 text-sm text-gray-600 line-clamp-1">
+          <p className="mb-6 mt-2 line-clamp-1 text-sm text-gray-600">
             {article.shortDescription}
           </p>
-          <div className="mt-auto mb-0 flex items-center justify-between text-sm">
+          <div className="mb-0 mt-auto flex items-center justify-between text-sm">
             <span className="text-gray-400">
               {formatTimeAgo(article.date_created || "")}
             </span>
-            <span className="text-[#0D169E] text-sm cursor-pointer">
+            <span className="cursor-pointer text-sm text-[#0D169E]">
               Xem thêm →
             </span>
           </div>

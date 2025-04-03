@@ -41,7 +41,7 @@ class NewsService extends HttpService {
   async getAllNews(): Promise<NewsResponse> {
     const response: AxiosResponse<NewsResponse> = await this.get<NewsResponse>(
       "items/articles",
-      {}
+      {},
     );
     return response.data;
   }
@@ -50,7 +50,7 @@ class NewsService extends HttpService {
     const queryString = new URLSearchParams(queries).toString();
     const response: AxiosResponse<NewsResponse> = await this.get<NewsResponse>(
       `items/articles?${queryString}`,
-      {}
+      {},
     );
     return response.data;
   }

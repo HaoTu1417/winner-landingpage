@@ -119,26 +119,27 @@ const ServiceSection: React.FC = () => {
   };
 
   return (
-    <section className="bg-white py-10 mt-[4rem]">
+    <section className="mt-[4rem] bg-white py-10">
       <div className="container mx-auto">
         {/* Tabs */}
-        <div className="text-center ">
-          <h1 className="text-green-600 text-4xl font-bold mb-[2rem] leading-tight bg-[linear-gradient(89.95deg,#0D169E_0.08%,#1C8D54_105.53%)] bg-clip-text text-transparent">
+        <div className="text-center">
+          <h1 className="mb-[2rem] bg-[linear-gradient(89.95deg,#0D169E_0.08%,#1C8D54_105.53%)] bg-clip-text text-4xl font-bold leading-tight text-green-600 text-transparent">
             {t("companyProvide")}
           </h1>
           <p className="mb-[3rem]">
-          Giải pháp tài chính thông minh, tối ưu lợi nhuận Ứng dụng công nghệ hiện đại cùng đội ngũ chuyên gia tài chính hàng đầu,
-chúng tôi cung cấp tư vấn đầu tư chuyên sâu, thông tin tài chính minh bạch, và các gói tài chính linh hoạt với lãi suất hấp dẫn nhất trên thị trường.
-Giúp bạn ra quyết định đúng đắn – An tâm đầu tư – Gia tăng tài sản.
-
+            Giải pháp tài chính thông minh, tối ưu lợi nhuận Ứng dụng công nghệ
+            hiện đại cùng đội ngũ chuyên gia tài chính hàng đầu, chúng tôi cung
+            cấp tư vấn đầu tư chuyên sâu, thông tin tài chính minh bạch, và các
+            gói tài chính linh hoạt với lãi suất hấp dẫn nhất trên thị trường.
+            Giúp bạn ra quyết định đúng đắn – An tâm đầu tư – Gia tăng tài sản.
           </p>
 
-          <div className="flex justify-center space-x-8 text-gray-600 hidden">
+          <div className="flex hidden justify-center space-x-8 text-gray-600">
             <button
               onClick={() => setActiveTab("individual")}
               className={`${
                 activeTab === "individual"
-                  ? "border-b-2 border-green-600 text-black font-medium"
+                  ? "border-b-2 border-green-600 font-medium text-black"
                   : "hover:text-black"
               } px-4 py-2`}
             >
@@ -148,7 +149,7 @@ Giúp bạn ra quyết định đúng đắn – An tâm đầu tư – Gia tăn
               onClick={() => setActiveTab("financial")}
               className={`${
                 activeTab === "financial"
-                  ? "border-b-2 border-green-600 text-black font-medium"
+                  ? "border-b-2 border-green-600 font-medium text-black"
                   : "hover:text-black"
               } px-4 py-2`}
             >
@@ -158,7 +159,7 @@ Giúp bạn ra quyết định đúng đắn – An tâm đầu tư – Gia tăn
               onClick={() => setActiveTab("utilities")}
               className={`${
                 activeTab === "utilities"
-                  ? "border-b-2 border-green-600 text-black font-medium"
+                  ? "border-b-2 border-green-600 font-medium text-black"
                   : "hover:text-black"
               } px-4 py-2`}
             >
@@ -168,7 +169,7 @@ Giúp bạn ra quyết định đúng đắn – An tâm đầu tư – Gia tăn
               onClick={() => setActiveTab("support")}
               className={`${
                 activeTab === "support"
-                  ? "border-b-2 border-green-600 text-black font-medium"
+                  ? "border-b-2 border-green-600 font-medium text-black"
                   : "hover:text-black"
               } px-4 py-2`}
             >
@@ -178,25 +179,25 @@ Giúp bạn ra quyết định đúng đắn – An tâm đầu tư – Gia tăn
         </div>
 
         {/* Main Content */}
-        <div className="flex flex-wrap justify-center items-center h-full">
-          <div className="grid grid-cols-1 md:grid-cols-4 w-full gap-4">
+        <div className="flex h-full flex-wrap items-center justify-center">
+          <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-4">
             {" "}
             {/* Added `gap-4` */}
             {tabContent[activeTab]?.map((item, index) => (
               <div
                 key={index}
-                className="w-auto h-full bg-gray-100 flex items-center justify-center shadow-md p-4 rounded-xl"
+                className="flex h-full w-auto items-center justify-center rounded-xl bg-gray-100 p-4 shadow-md"
                 style={cardStyle}
               >
                 <div className="text-center">
                   <img
                     src={item.imgSrc}
                     alt={item.label}
-                    className="w-12 h-12 mx-auto"
+                    className="mx-auto h-12 w-12"
                   />
-                  <p className="mt-2 font-bold text-xl">{item.label}</p>
+                  <p className="mt-2 text-xl font-bold">{item.label}</p>
                   {item.fileDescription && (
-                    <p className="mt-2 font-medium text-l">
+                    <p className="text-l mt-2 font-medium">
                       {item.fileDescription}
                     </p>
                   )}

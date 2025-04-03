@@ -67,8 +67,8 @@ const NewsComponent: React.FC = () => {
 
   return (
     <div className="container mx-auto py-[4rem]">
-      <div className="w-full flex items-center justify-center mb-8">
-        <h1 className="text-green-600 text-4xl font-bold leading-tight bg-[linear-gradient(89.95deg,#0D169E_0.08%,#1C8D54_105.53%)] bg-clip-text text-transparent">
+      <div className="mb-8 flex w-full items-center justify-center">
+        <h1 className="bg-[linear-gradient(89.95deg,#0D169E_0.08%,#1C8D54_105.53%)] bg-clip-text text-4xl font-bold leading-tight text-green-600 text-transparent">
           {t("news")}
         </h1>
       </div>
@@ -95,15 +95,15 @@ const NewsComponent: React.FC = () => {
             ))}
           </Carousel>
 
-          <div className="flex items-center justify-center space-x-4 mt-[4rem]">
+          <div className="mt-[4rem] flex items-center justify-center space-x-4">
             <button
-              className="w-10 h-10 bg-white border border-blue-700 rounded-full flex items-center justify-center hover:bg-[#0D169E]/[10%]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-700 bg-white hover:bg-[#0D169E]/[10%]"
               onClick={prevSlide}
             >
               <ChevronLeft className="text-[#0D169E]" />
             </button>
             <button
-              className="w-10 h-10 bg-white border border-blue-700 rounded-full flex items-center justify-center hover:bg-[#0D169E]/[10%]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-700 bg-white hover:bg-[#0D169E]/[10%]"
               onClick={nextSlide}
             >
               <ChevronRight className="text-[#0D169E]" />

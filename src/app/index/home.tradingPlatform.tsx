@@ -12,31 +12,31 @@ function TradingPlatform() {
 
   const tabs = ["WFS Trading", "Mobile App"];
   return (
-    <div className="max-w-5xl mx-auto p-5 text-center">
+    <div className="mx-auto max-w-5xl p-5 text-center">
       <h1 className="text-2xl font-bold text-gray-800">WFS Trading</h1>
-      <p className="text-gray-600 mt-4">
+      <p className="mt-4 text-gray-600">
         Nền tảng giao dịch của chúng tôi được xây dựng trên những giá trị cốt
         lõi của sự minh bạch, hiệu quả và tính khả dụng. Nó nhằm mục tiêu cung
         cấp cho nhà đầu tư các công cụ để đưa ra những quyết định đầu tư và kế
         hoạch tài chính tốt nhất có thể sẽ định hình tương lai của họ.
       </p>
-      <p className="text-gray-600 mt-2">
+      <p className="mt-2 text-gray-600">
         Các chức năng bao gồm giao dịch thời gian thực và tần suất cao, thực
         hiện nhanh chóng, cho vay ký quỹ tự động, lệnh có điều kiện, chuyển tiền
         mặt, theo dõi danh mục và phân tích tài chính.
       </p>
-      <p className="text-gray-600 mt-2">
+      <p className="mt-2 text-gray-600">
         Truy cập thông qua máy tính để bàn (Vietcap Pro), trang website và ứng
         dụng di động.
       </p>
 
-      <div className="flex items-center justify-center p-4 rounded-lg shadow-sm">
-        <div className="flex space-x-4 bg-gray-200 p-1 rounded-full">
+      <div className="flex items-center justify-center rounded-lg p-4 shadow-sm">
+        <div className="flex space-x-4 rounded-full bg-gray-200 p-1">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 activeTab === tab
                   ? "bg-[#0D169E] text-white shadow"
                   : "text-gray-500 hover:text-black"
@@ -48,8 +48,8 @@ function TradingPlatform() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center mt-8">
-      <img
+      <div className="mt-8 flex flex-col items-center">
+        <img
           src="/images/homepage/khcn-vietcap-trading.webp"
           alt="Laptop displaying Vietcap Pro"
           className={`w-full max-w-md ${activeTab === tabs[0] ? "" : "hidden"}`}
@@ -60,7 +60,7 @@ function TradingPlatform() {
           className={`w-full max-w-md ${activeTab === tabs[1] ? "" : "hidden"}`}
         />
         <button
-          className={`mt-6 px-6 py-3 bg-[#0D169E] text-white rounded-md hover:bg-green-800 ${
+          className={`mt-6 rounded-md bg-[#0D169E] px-6 py-3 text-white hover:bg-green-800 ${
             activeTab === tabs[0] ? "" : "hidden"
           }`}
         >
@@ -72,7 +72,7 @@ function TradingPlatform() {
             altText="Placeholder Icon"
             buttonText=""
             onClick={handleClick}
-            className={`m-6 w-auto h-auto bg-black text-white rounded-md hover:bg-black ${
+            className={`m-6 h-auto w-auto rounded-md bg-black text-white hover:bg-black ${
               activeTab === tabs[1] ? "" : "hidden"
             }`}
           />
@@ -81,7 +81,7 @@ function TradingPlatform() {
             altText="Placeholder Icon"
             buttonText=""
             onClick={handleClick}
-            className={`m-6 w-auto h-auto bg-black text-white rounded-md hover:bg-black ${
+            className={`m-6 h-auto w-auto rounded-md bg-black text-white hover:bg-black ${
               activeTab === tabs[1] ? "" : "hidden"
             }`}
           />

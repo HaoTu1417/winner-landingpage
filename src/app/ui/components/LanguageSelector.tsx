@@ -52,11 +52,14 @@ const LanguageSelector: React.FC = () => {
   };
 
   return (
-    <div className="relative inline-block text-left z-50" style={{visibility:"hidden"}}>
+    <div
+      className="relative z-50 inline-block text-left"
+      style={{ visibility: "hidden" }}
+    >
       {/* Selected Language Button */}
       <button
         onClick={toggleDropdown}
-        className="flex items-center justify-between w-28 px-3 py-2 bg-white border border-gray-300 rounded-full shadow-sm hover:border-gray-400"
+        className="flex w-28 items-center justify-between rounded-full border border-gray-300 bg-white px-3 py-2 shadow-sm hover:border-gray-400"
       >
         <span className="flex items-center text-black">
           <Image
@@ -66,7 +69,7 @@ const LanguageSelector: React.FC = () => {
             height={20}
             className="mr-2 rounded-full"
           />
-          <span className="font-semibold text-sm">
+          <span className="text-sm font-semibold">
             {selectedLanguage.displayCode}
           </span>
         </span>
@@ -75,12 +78,12 @@ const LanguageSelector: React.FC = () => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0 w-28 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg">
+        <div className="absolute left-0 mt-2 w-28 rounded-lg border border-gray-300 bg-white shadow-lg">
           {languages.map((language) => (
             <button
               key={language.displayCode}
               onClick={() => selectLanguage(language)}
-              className="flex items-center w-full px-3 py-2 text-left hover:bg-gray-100 text-black"
+              className="flex w-full items-center px-3 py-2 text-left text-black hover:bg-gray-100"
             >
               <Image
                 src={language.flag}
@@ -89,7 +92,7 @@ const LanguageSelector: React.FC = () => {
                 height={20}
                 className="mr-2 rounded-full"
               />
-              <span className="font-semibold text-sm">
+              <span className="text-sm font-semibold">
                 {language.displayCode}
               </span>
             </button>

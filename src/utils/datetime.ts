@@ -22,7 +22,7 @@ export function formatTimeAgo(timestamp: string): string {
   const createdDate = new Date(timestamp);
   const now = new Date();
   const diffInSeconds = Math.floor(
-    (now.getTime() - createdDate.getTime()) / 1000
+    (now.getTime() - createdDate.getTime()) / 1000,
   );
 
   for (const interval of intervals) {
