@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { newsService } from "@/services/NewsService";
 import { formatTimeAgo } from "@/utils/datetime";
+import Link from "next/link";
 
 interface NewArticleCardProps {
   article: NewsArticle;
@@ -14,7 +15,7 @@ export default function NewArticleCard({
   className,
 }: NewArticleCardProps) {
   return (
-    <a href={`/news/${article.id}`} title={article.title}>
+    <Link href={`/news/${article.id}`} title={article.title}>
       <Card
         className={cn(
           "flex h-full w-full flex-col overflow-hidden rounded-[32px] shadow-none",
@@ -43,6 +44,6 @@ export default function NewArticleCard({
           </div>
         </CardContent>
       </Card>
-    </a>
+    </Link>
   );
 }

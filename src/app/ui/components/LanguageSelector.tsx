@@ -54,7 +54,7 @@ const LanguageSelector: React.FC = () => {
   return (
     <div
       className="relative z-50 inline-block text-left"
-      style={{ visibility: "hidden" }}
+      style={{ display: "none" }}
     >
       {/* Selected Language Button */}
       <button

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import LanguageSelector from "../ui/components/LanguageSelector";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,7 +60,7 @@ const Header = () => {
             {navLinks.map((link, index) => {
               const isSpecial = pathname === link.href;
               return (
-                <a
+                <Link
                   key={index}
                   href={link.href}
                   className={`${commonClasses} ${link.extraClass || ""} ${
@@ -72,7 +73,7 @@ const Header = () => {
                   }
                 >
                   {link.label}
-                </a>
+                </Link>
               );
             })}
           </div>
@@ -85,9 +86,9 @@ const Header = () => {
         <nav className="left-0 top-full w-full bg-black text-white lg:hidden">
           <div className="flex flex-col space-y-2 p-4">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="block py-2">
+              <Link key={link.href} href={link.href} className="block py-2">
                 {link.label.toUpperCase()}
-              </a>
+              </Link>
             ))}
           </div>
         </nav>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Header from "@/components/header";
 import NewsArticle from "@/components/News";
 import { newsService } from "@/services/NewsService";
 import { Breadcrumb, Col, Empty, notification, Row, Spin } from "antd";
@@ -10,6 +9,7 @@ import RelatedNews from "./news.relatedNews";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { formatDateTime } from "@/utils/datetime";
 import Link from "next/link";
+import Header from "@/components/header";
 
 export default function Index() {
   const [notify, contextHolder] = notification.useNotification();

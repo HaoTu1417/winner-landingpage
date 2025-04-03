@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const HeroSection = () => {
@@ -12,18 +13,18 @@ const HeroSection = () => {
           tiêu đầu tư nhanh chóng và dễ dàng.
         </p>
         <div className="flex justify-center gap-4">
-          <a
+          <Link
             href="#learn-more"
             className="rounded-md bg-white px-6 py-3 font-semibold text-blue-700 transition hover:bg-gray-100"
           >
             Tìm hiểu thêm
-          </a>
-          <a
+          </Link>
+          <Link
             href="#contact"
             className="rounded-md border-2 border-white bg-blue-700 px-6 py-3 font-semibold transition hover:bg-blue-800"
           >
             Liên hệ chúng tôi
-          </a>
+          </Link>
         </div>
       </div>
     </section>
