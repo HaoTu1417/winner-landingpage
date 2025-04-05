@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -23,13 +24,13 @@ const Footer = () => {
         </p>
       </div>
       <div className="fixed bottom-4 right-4">
-        <a
+        <Link
           href="#top"
           className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white shadow-lg hover:bg-green-700"
           aria-label="Lên đầu trang"
         >
           <i className="fas fa-arrow-up"></i>
-        </a>
+        </Link>
       </div>
     </footer>
   );

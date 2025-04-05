@@ -7,6 +7,7 @@ import { newsService } from "@/services/NewsService";
 import Carousel from "react-multi-carousel";
 import { Spin } from "antd";
 import NewArticleCard from "@/components/ui/news/NewArticleCard";
+import { useAppSelector } from "@/store/hooks";
 
 const PAGE_SIZE = 12;
 
@@ -34,6 +35,7 @@ const NewsComponent: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [carouselData, setCarouseData] = useState<NewsArticle[]>([]);
   const carouselRef = useRef<Carousel>(null);
+  const { isAuth } = useAppSelector((state) => state.auth);
 
   const getNews = async () => {
     try {
@@ -64,6 +66,8 @@ const NewsComponent: React.FC = () => {
       setCarouseData(data || []);
     });
   }, []);
+
+  if (!isAuth) return null;
 
   return (
     <div className="container mx-auto py-[4rem]">

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Award {
   id: number;
@@ -68,12 +69,12 @@ const AwardsSection: React.FC = () => {
             <p className="text-sm text-gray-600">
               {awards[currentIndex].description}
             </p>
-            <a
+            <Link
               href={awards[currentIndex].link}
               className="mt-2 inline-block font-medium text-green-600 hover:underline"
             >
               Xem thêm →
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -91,7 +92,7 @@ const AwardsSection: React.FC = () => {
             >
               <h4 className="text-sm font-semibold">{award.title}</h4>
               <p className="text-xs">{award.description}</p>
-              <a
+              <Link
                 href={award.link}
                 className={`mt-2 inline-block ${
                   currentIndex === index
@@ -100,7 +101,7 @@ const AwardsSection: React.FC = () => {
                 }`}
               >
                 Xem thêm →
-              </a>
+              </Link>
             </div>
           ))}
         </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Header from "@/components/header";
 import NewsArticle from "@/components/News";
 import { newsService } from "@/services/NewsService";
 import {
@@ -18,6 +17,7 @@ import NewArticleCard from "@/components/ui/news/NewArticleCard";
 import { debounce } from "@/utils/debounce";
 import NewsFilters from "./news.filters";
 import Link from "next/link";
+import Header from "@/components/header";
 
 const PAGE_SIZE = 12;
 
