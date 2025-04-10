@@ -127,11 +127,8 @@ const ServiceSection: React.FC = () => {
             {t("companyProvide")}
           </h1>
           <p className="mb-[3rem]">
-            Giải pháp tài chính thông minh, tối ưu lợi nhuận Ứng dụng công nghệ
-            hiện đại cùng đội ngũ chuyên gia tài chính hàng đầu, chúng tôi cung
-            cấp tư vấn đầu tư chuyên sâu, thông tin tài chính minh bạch, và các
-            gói tài chính linh hoạt với lãi suất hấp dẫn nhất trên thị trường.
-            Giúp bạn ra quyết định đúng đắn – An tâm đầu tư – Gia tăng tài sản.
+            Ứng dụng hỗ trợ giao dịch ký quỹ với lãi xuất ưu đãi hấp dẫn, chuyên
+            sâu thị trường Việt Nam, Mở tài khoản đa sàn chỉ trong 5 phút.
           </p>
 
           <div className="flex hidden justify-center space-x-8 text-gray-600">
